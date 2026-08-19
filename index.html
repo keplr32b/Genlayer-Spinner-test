@@ -3,37 +3,164 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GenLayer Loading Spinner - Submission</title>
+  <title>GenLayer Loading Spinner - Community Submission</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: system-ui, sans-serif;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: 100vh;
     }
-    .dark-bg { background: #070707; color: #ffffff; }
-    .light-bg { background: #ffffff; color: #070707; }
+
+    /* Mobile Responsive Layout */
+    @media (max-width: 768px) {
+      body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+      }
+    }
+
     .preview-card {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 24px;
+      padding: 40px 20px;
+    }
+
+    /* Dark Theme */
+    .dark-bg {
+      background-color: #070707;
+      color: #ffffff;
+      --track-color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Light Theme */
+    .light-bg {
+      background-color: #ffffff;
+      color: #070707;
+      --track-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .preview-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      opacity: 0.8;
+      text-transform: uppercase;
+    }
+
+    /* Embedded SVG Animation Engine */
+    .genlayer-spinner {
+      width: 80px;
+      height: 80px;
+      display: inline-block;
+    }
+
+    .gl-track {
+      fill: none;
+      stroke: var(--track-color, rgba(127, 127, 127, 0.2));
+      stroke-width: 5;
+    }
+
+    .gl-arc {
+      fill: none;
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-dasharray: 238;
+      stroke-dashoffset: 180;
+      transform-origin: 50px 50px;
+      animation: gl-spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    .gl-core {
+      transform-origin: 50px 50px;
+      animation: gl-pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes gl-spin {
+      0% {
+        transform: rotate(0deg);
+        stroke-dashoffset: 200;
+      }
+      50% {
+        stroke-dashoffset: 60;
+        transform: rotate(180deg);
+      }
+      100% {
+        transform: rotate(360deg);
+        stroke-dashoffset: 200;
+      }
+    }
+
+    @keyframes gl-pulse {
+      0%, 100% {
+        transform: scale(0.85);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.08);
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Dark Mode Test -->
+
+  <!-- Dark Theme Preview -->
   <div class="preview-card dark-bg">
     <h3>Dark Theme Preview</h3>
-    <!-- Embed SVG Code Here -->
+    <svg class="genlayer-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="status" aria-label="Loading">
+      <defs>
+        <linearGradient id="gl-gradient-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#110FFF" />
+          <stop offset="50%" stop-color="#00FF66" />
+          <stop offset="100%" stop-color="#110FFF" />
+        </linearGradient>
+
+        <filter id="gl-glow-dark" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="2.5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <circle class="gl-track" cx="50" cy="50" r="38" />
+      <circle class="gl-arc" cx="50" cy="50" r="38" stroke="url(#gl-gradient-dark)" filter="url(#gl-glow-dark)" />
+      <g class="gl-core">
+        <polygon points="50,26 68,64 50,54 32,64" fill="url(#gl-gradient-dark)" />
+      </g>
+    </svg>
   </div>
 
-  <!-- Light Mode Test -->
+  <!-- Light Theme Preview -->
   <div class="preview-card light-bg">
     <h3>Light Theme Preview</h3>
-    <!-- Embed SVG Code Here -->
+    <svg class="genlayer-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="status" aria-label="Loading">
+      <defs>
+        <linearGradient id="gl-gradient-light" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#110FFF" />
+          <stop offset="50%" stop-color="#00C853" />
+          <stop offset="100%" stop-color="#110FFF" />
+        </linearGradient>
+      </defs>
+
+      <circle class="gl-track" cx="50" cy="50" r="38" />
+      <circle class="gl-arc" cx="50" cy="50" r="38" stroke="url(#gl-gradient-light)" />
+      <g class="gl-core">
+        <polygon points="50,26 68,64 50,54 32,64" fill="url(#gl-gradient-light)" />
+      </g>
+    </svg>
   </div>
+
 </body>
 </html>
