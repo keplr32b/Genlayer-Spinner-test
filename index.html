@@ -3,264 +3,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GenLayer Animated Spinner - Community Portal</title>
+  <title>GenLayer Interface</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      background-color: #050508;
+      font-family: 'Inter', -apple-system, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      background-color: #0b0f17;
+      margin: 0;
+      gap: 20px;
+      padding: 20px;
     }
 
-    @media (max-width: 768px) {
-      body {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-      }
-    }
-
-    .preview-card {
+    /* CARD DESIGN */
+    .card {
+      width: 380px;
+      border-radius: 28px;
+      padding: 32px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      padding: 40px 20px;
+      gap: 24px;
+      position: relative;
     }
 
-    /* Dark Mode */
-    .dark-bg {
-      background-color: #070707;
-      color: #ffffff;
-      --logo-fill: #ffffff;
-    }
-
-    /* Light Mode */
-    .light-bg {
-      background-color: #ffffff;
-      color: #070707;
-      --logo-fill: #070707;
-    }
-
-    .preview-card h3 {
-      font-size: 0.95rem;
+    /* HEADER */
+    .header {
+      font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 1.2px;
-      opacity: 0.75;
+      letter-spacing: 1.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       text-transform: uppercase;
     }
 
-    /* Multi-size layout setup */
-    .spinner-grid {
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #3b82f6;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #3b82f6;
+    }
+
+    /* DARK CARD */
+    .card.dark {
+      background: #0f111a;
+      border: 1px solid #2a2d3e;
+      color: #ffffff;
+    }
+
+    /* LIGHT CARD */
+    .card.light {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      color: #1e293b;
+    }
+
+    .card.light .header { color: #64748b; }
+
+    /* TEXT CONTENT */
+    .content h2 { margin: 0; font-size: 1.25rem; }
+    .content p { margin: 8px 0 0 0; opacity: 0.6; font-size: 0.95rem; }
+
+    /* SPINNER CONTAINER */
+    .spinner-container {
+      height: 200px;
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 36px;
+      align-items: center;
+      position: relative;
     }
 
-    /* SVG Spinner Sizes */
-    .genlayer-spinner {
-      display: inline-block;
-      overflow: visible;
-    }
+    /* SVG SPINNER LOGIC (Same as previous) */
+    .genlayer-spinner { width: 100px; height: 100px; }
+    .gl-outer-ring { transform-origin: 50px 50px; animation: rotate-cw 4s linear infinite; }
+    .gl-inner-ring { transform-origin: 50px 50px; animation: rotate-ccw 3s linear infinite; }
+    .gl-logo-center { transform-origin: 50px 50px; animation: rotate-cw 6s linear infinite; }
 
-    .size-lg { width: 100px; height: 100px; }
-    .size-md { width: 56px; height: 56px; }
-    .size-sm { width: 28px; height: 28px; }
-
-    /* Motion System - Continuous Rotations */
-    .gl-outer-ring {
-      transform-origin: 50px 50px;
-      animation: gl-rotate-cw 3s linear infinite;
-    }
-
-    .gl-inner-ring {
-      transform-origin: 50px 50px;
-      animation: gl-rotate-ccw 2.2s linear infinite;
-    }
-
-    /* Exact GenLayer Logo Smooth Spinning (No Blink/Pulse) */
-    .gl-logo-center {
-      transform-origin: 50px 50px;
-      animation: gl-rotate-cw 4s linear infinite;
-    }
-
-    /* Keyframe Rotations */
-    @keyframes gl-rotate-cw {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @keyframes gl-rotate-ccw {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(-360deg); }
-    }
+    @keyframes rotate-cw { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes rotate-ccw { 0% { transform: rotate(0deg); } 100% { transform: rotate(-360deg); } }
   </style>
 </head>
 <body>
 
-  <!-- Dark Theme Preview -->
-  <div class="preview-card dark-bg">
-    <h3>Dark Theme Preview</h3>
-    <div class="spinner-grid">
-      <!-- 100px Full Page Loader -->
-      <svg class="genlayer-spinner size-lg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="gl-dark-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#00FF88" />
-            <stop offset="50%" stop-color="#00E5FF" />
-            <stop offset="100%" stop-color="#7000FF" />
-          </linearGradient>
-        </defs>
-
-        <!-- Outer Orbit with Floating Particles -->
-        <g class="gl-outer-ring">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#7000FF" stroke-width="1.5" stroke-dasharray="12 18 35 15" opacity="0.6"/>
-          <circle cx="50" cy="6" r="3.5" fill="#00FF88" />
-          <circle cx="94" cy="50" r="2.5" fill="#00E5FF" />
-        </g>
-
-        <!-- Inner Counter-Rotating Orbit -->
-        <g class="gl-inner-ring">
-          <circle cx="50" cy="50" r="34" fill="none" stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="45 20" opacity="0.8"/>
-          <circle cx="16" cy="50" r="3" fill="#7000FF" />
-          <circle cx="50" cy="84" r="2" fill="#00FF88" />
-        </g>
-
-        <!-- Rotating Exact GenLayer Logo Symbol -->
-        <g class="gl-logo-center">
-          <path fill="url(#gl-dark-grad)" fill-rule="evenodd" d="
-            M 50,14 
-            L 18,82 
-            L 34,82 
-            L 44,60 
-            L 44,14 
-            L 50,14 
-            Z
-            M 50,14 
-            L 82,82 
-            L 66,82 
-            L 56,60 
-            L 56,14 
-            L 50,14 
-            Z
-            M 50,38 
-            L 36,68 
-            L 64,68 
-            Z
-          " />
-        </g>
-      </svg>
-
-      <!-- 56px UI Modal Loader -->
-      <svg class="genlayer-spinner size-md" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g class="gl-outer-ring">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#7000FF" stroke-width="2" stroke-dasharray="12 18 35 15" opacity="0.6"/>
-          <circle cx="50" cy="6" r="4" fill="#00FF88" />
-        </g>
-        <g class="gl-inner-ring">
-          <circle cx="50" cy="50" r="34" fill="none" stroke="#00E5FF" stroke-width="2" stroke-dasharray="45 20" opacity="0.8"/>
-          <circle cx="16" cy="50" r="3.5" fill="#7000FF" />
-        </g>
-        <g class="gl-logo-center">
-          <path fill="url(#gl-dark-grad)" fill-rule="evenodd" d="
-            M 50,14 L 18,82 L 34,82 L 44,60 L 44,14 L 50,14 Z
-            M 50,14 L 82,82 L 66,82 L 56,60 L 56,14 L 50,14 Z
-            M 50,38 L 36,68 L 64,68 Z
-          " />
-        </g>
-      </svg>
-
-      <!-- 28px Button State Loader -->
-      <svg class="genlayer-spinner size-sm" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g class="gl-outer-ring">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#00FF88" stroke-width="4" stroke-dasharray="40 20" />
-        </g>
-        <g class="gl-logo-center">
-          <path fill="#00FF88" fill-rule="evenodd" d="
-            M 50,14 L 18,82 L 34,82 L 44,60 L 44,14 L 50,14 Z
-            M 50,14 L 82,82 L 66,82 L 56,60 L 56,14 L 50,14 Z
-            M 50,38 L 36,68 L 64,68 Z
-          " />
+  <!-- DARK INTERFACE CARD -->
+  <div class="card dark">
+    <div class="header">
+      DARK INTERFACE <div class="status-dot"></div>
+    </div>
+    
+    <div class="spinner-container">
+      <svg class="genlayer-spinner" viewBox="0 0 100 100">
+        <!-- Rings -->
+        <circle class="gl-outer-ring" cx="50" cy="50" r="40" fill="none" stroke="#6366f1" stroke-width="2" stroke-dasharray="10 10" opacity="0.5"/>
+        <circle class="gl-inner-ring" cx="50" cy="50" r="30" fill="none" stroke="#a855f7" stroke-width="2" stroke-dasharray="5 15" opacity="0.5"/>
+        
+        <!-- Logo -->
+        <g class="gl-logo-center" fill="#ffffff">
+          <path d="M50 20 L 20 80 L 80 80 Z M50 35 L 35 70 L 65 70 Z" />
         </g>
       </svg>
     </div>
+
+    <div class="content">
+      <h2>Verifying state</h2>
+      <p>Validator signals are converging.</p>
+    </div>
   </div>
 
-  <!-- Light Theme Preview -->
-  <div class="preview-card light-bg">
-    <h3>Light Theme Preview</h3>
-    <div class="spinner-grid">
-      <!-- 100px Full Page Loader -->
-      <svg class="genlayer-spinner size-lg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="gl-light-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#00C853" />
-            <stop offset="50%" stop-color="#0091EA" />
-            <stop offset="100%" stop-color="#6200EA" />
-          </linearGradient>
-        </defs>
+  <!-- LIGHT INTERFACE CARD -->
+  <div class="card light">
+    <div class="header">
+      LIGHT INTERFACE <div class="status-dot"></div>
+    </div>
 
-        <g class="gl-outer-ring">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#6200EA" stroke-width="1.5" stroke-dasharray="12 18 35 15" opacity="0.5"/>
-          <circle cx="50" cy="6" r="3.5" fill="#00C853" />
-          <circle cx="94" cy="50" r="2.5" fill="#0091EA" />
-        </g>
-
-        <g class="gl-inner-ring">
-          <circle cx="50" cy="50" r="34" fill="none" stroke="#0091EA" stroke-width="1.5" stroke-dasharray="45 20" opacity="0.7"/>
-          <circle cx="16" cy="50" r="3" fill="#6200EA" />
-          <circle cx="50" cy="84" r="2" fill="#00C853" />
-        </g>
-
-        <g class="gl-logo-center">
-          <path fill="url(#gl-light-grad)" fill-rule="evenodd" d="
-            M 50,14 L 18,82 L 34,82 L 44,60 L 44,14 L 50,14 Z
-            M 50,14 L 82,82 L 66,82 L 56,60 L 56,14 L 50,14 Z
-            M 50,38 L 36,68 L 64,68 Z
-          " />
+    <div class="spinner-container">
+      <svg class="genlayer-spinner" viewBox="0 0 100 100">
+        <!-- Rings -->
+        <circle class="gl-outer-ring" cx="50" cy="50" r="40" fill="none" stroke="#6366f1" stroke-width="2" stroke-dasharray="10 10" opacity="0.3"/>
+        <circle class="gl-inner-ring" cx="50" cy="50" r="30" fill="none" stroke="#a855f7" stroke-width="2" stroke-dasharray="5 15" opacity="0.3"/>
+        
+        <!-- Logo -->
+        <g class="gl-logo-center" fill="#1e293b">
+          <path d="M50 20 L 20 80 L 80 80 Z M50 35 L 35 70 L 65 70 Z" />
         </g>
       </svg>
+    </div>
 
-      <!-- 56px UI Modal Loader -->
-      <svg class="genlayer-spinner size-md" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g class="gl-outer-ring">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#6200EA" stroke-width="2" stroke-dasharray="12 18 35 15" opacity="0.5"/>
-          <circle cx="50" cy="6" r="4" fill="#00C853" />
-        </g>
-        <g class="gl-inner-ring">
-          <circle cx="50" cy="50" r="34" fill="none" stroke="#0091EA" stroke-width="2" stroke-dasharray="45 20" opacity="0.7"/>
-          <circle cx="16" cy="50" r="3.5" fill="#6200EA" />
-        </g>
-        <g class="gl-logo-center">
-          <path fill="url(#gl-light-grad)" fill-rule="evenodd" d="
-            M 50,14 L 18,82 L 34,82 L 44,60 L 44,14 L 50,14 Z
-            M 50,14 L 82,82 L 66,82 L 56,60 L 56,14 L 50,14 Z
-            M 50,38 L 36,68 L 64,68 Z
-          " />
-        </g>
-      </svg>
-
-      <!-- 28px Button State Loader -->
-      <svg class="genlayer-spinner size-sm" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g class="gl-outer-ring">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#0091EA" stroke-width="4" stroke-dasharray="40 20" />
-        </g>
-        <g class="gl-logo-center">
-          <path fill="#0091EA" fill-rule="evenodd" d="
-            M 50,14 L 18,82 L 34,82 L 44,60 L 44,14 L 50,14 Z
-            M 50,14 L 82,82 L 66,82 L 56,60 L 56,14 L 50,14 Z
-            M 50,38 L 36,68 L 64,68 Z
-          " />
-        </g>
-      </svg>
+    <div class="content">
+      <h2>Resolving result</h2>
+      <p>Waiting for collective agreement.</p>
     </div>
   </div>
 
