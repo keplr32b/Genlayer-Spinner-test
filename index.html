@@ -3,213 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GenLayer Official Animated Spinner</title>
+  <title>GenLayer Official Spinner</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    body { background-color: #0b0f17; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+    
+    .spinner-wrapper { width: 120px; height: 120px; position: relative; display: flex; align-items: center; justify-content: center; }
+
+    /* RINGS */
+    .ring-outer, .ring-inner { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
+    .ring-outer { animation: rotate-cw 4s linear infinite; }
+    .ring-inner { animation: rotate-ccw 3s linear infinite; }
+
+    /* LOGO ROTATION (No Pulse, only Rotate) */
+    .gl-logo-center {
+      width: 40px;
+      height: 40px;
+      fill: #ffffff;
+      animation: rotate-cw 3s linear infinite; /* Logo rotating */
+      transform-origin: center;
     }
 
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 100vh;
-      background-color: #f0f3f8;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-      }
-    }
-
-    .preview-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      padding: 40px;
-    }
-
-    /* Dark Mode */
-    .dark-bg {
-      background-color: #0b0f17;
-      color: #ffffff;
-      --logo-color: #ffffff;
-    }
-
-    /* Light Mode */
-    .light-bg {
-      background-color: #f8fafc;
-      color: #0b0f17;
-      --logo-color: #0b0f17;
-    }
-
-    .preview-card h3 {
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      opacity: 0.7;
-      text-transform: uppercase;
-    }
-
-    /* Showcase Container */
-    .spinner-showcase {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-    }
-
-    /* Base SVG Setup */
-    .gl-orbital-spinner {
-      display: inline-block;
-      overflow: visible;
-    }
-
-    /* Sizing Variants */
-    .size-lg { width: 90px; height: 90px; }
-    .size-md { width: 56px; height: 56px; }
-    .size-sm { width: 28px; height: 28px; }
-
-    /* Orbital Rotations */
-    .ring-outer {
-      transform-origin: 50px 50px;
-      animation: spin-clockwise 3s linear infinite;
-    }
-
-    .ring-inner {
-      transform-origin: 50px 50px;
-      animation: spin-counter-clockwise 2.2s linear infinite;
-    }
-
-    .logo-pulse {
-      transform-origin: 50px 50px;
-      animation: core-breathe 2s ease-in-out infinite;
-    }
-
-    /* Keyframe Animations */
-    @keyframes spin-clockwise {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @keyframes spin-counter-clockwise {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(-360deg); }
-    }
-
-    @keyframes core-breathe {
-      0%, 100% { transform: scale(0.92); opacity: 0.85; }
-      50% { transform: scale(1.05); opacity: 1; }
-    }
+    @keyframes rotate-cw { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes rotate-ccw { 0% { transform: rotate(0deg); } 100% { transform: rotate(-360deg); } }
   </style>
 </head>
 <body>
 
-  <!-- Dark Theme Preview -->
-  <div class="preview-card dark-bg">
-    <h3>Dark Theme Preview</h3>
-    <div class="spinner-showcase">
-      <!-- Large (90px) -->
-      <svg class="gl-orbital-spinner size-lg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <!-- Outer Rotating Orbit & Nodes -->
-        <g class="ring-outer">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#7000FF" stroke-width="1.5" stroke-dasharray="12 18 35 15" opacity="0.6"/>
-          <circle cx="50" cy="6" r="3.5" fill="#00FF88" />
-          <circle cx="94" cy="50" r="2.5" fill="#00E5FF" />
-        </g>
+<div class="spinner-wrapper">
+  <!-- Outer Orbit -->
+  <svg class="ring-outer" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#00FF88" stroke-width="2" stroke-dasharray="10 20" />
+  </svg>
 
-        <!-- Inner Counter-Rotating Orbit & Nodes -->
-        <g class="ring-inner">
-          <circle cx="50" cy="50" r="35" fill="none" stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="45 20" stroke-linecap="round" opacity="0.8"/>
-          <circle cx="15" cy="50" r="3" fill="#7000FF" />
-          <circle cx="50" cy="85" r="2" fill="#00FF88" />
-        </g>
+  <!-- Inner Orbit -->
+  <svg class="ring-inner" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="35" fill="none" stroke="#00E5FF" stroke-width="2" stroke-dasharray="5 15" />
+  </svg>
 
-        <!-- Official GenLayer Logo Path -->
-        <g class="logo-pulse">
-          <path fill="url(#gl-gradient-dark)" d="M50 8 L10 92 L38 92 L44 78 L50 88 L56 78 L62 92 L90 92 Z M50 28 L44 42 L50 54 L56 42 Z M44 60 L50 72 L56 60 Z" />
-          <path fill="var(--logo-color)" d="M50 15 L18 85 L32 85 L44 58 L50 70 L56 58 L68 85 L82 85 Z M50 36 L45 48 L50 58 L55 48 Z" />
-        </g>
-
-        <defs>
-          <linearGradient id="gl-gradient-dark" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#00FF88" />
-            <stop offset="50%" stop-color="#00E5FF" />
-            <stop offset="100%" stop-color="#7000FF" />
-          </linearGradient>
-        </defs>
-      </svg>
-
-      <!-- Medium (56px) -->
-      <svg class="gl-orbital-spinner size-md" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g class="ring-outer">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#7000FF" stroke-width="2" stroke-dasharray="12 18 35 15" opacity="0.6"/>
-          <circle cx="50" cy="6" r="4" fill="#00FF88" />
-        </g>
-        <g class="ring-inner">
-          <circle cx="50" cy="50" r="35" fill="none" stroke="#00E5FF" stroke-width="2" stroke-dasharray="45 20" opacity="0.8"/>
-          <circle cx="15" cy="50" r="3.5" fill="#7000FF" />
-        </g>
-        <g class="logo-pulse">
-          <path fill="url(#gl-gradient-dark)" d="M50 15 L18 85 L32 85 L44 58 L50 70 L56 58 L68 85 L82 85 Z M50 36 L45 48 L50 58 L55 48 Z" />
-        </g>
-      </svg>
-    </div>
-  </div>
-
-  <!-- Light Theme Preview -->
-  <div class="preview-card light-bg">
-    <h3>Light Theme Preview</h3>
-    <div class="spinner-showcase">
-      <!-- Large (90px) -->
-      <svg class="gl-orbital-spinner size-lg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g class="ring-outer">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#6200EA" stroke-width="1.5" stroke-dasharray="12 18 35 15" opacity="0.5"/>
-          <circle cx="50" cy="6" r="3.5" fill="#00C853" />
-          <circle cx="94" cy="50" r="2.5" fill="#0091EA" />
-        </g>
-
-        <g class="ring-inner">
-          <circle cx="50" cy="50" r="35" fill="none" stroke="#0091EA" stroke-width="1.5" stroke-dasharray="45 20" stroke-linecap="round" opacity="0.7"/>
-          <circle cx="15" cy="50" r="3" fill="#6200EA" />
-          <circle cx="50" cy="85" r="2" fill="#00C853" />
-        </g>
-
-        <g class="logo-pulse">
-          <path fill="url(#gl-gradient-light)" d="M50 8 L10 92 L38 92 L44 78 L50 88 L56 78 L62 92 L90 92 Z M50 28 L44 42 L50 54 L56 42 Z M44 60 L50 72 L56 60 Z" />
-          <path fill="var(--logo-color)" d="M50 15 L18 85 L32 85 L44 58 L50 70 L56 58 L68 85 L82 85 Z M50 36 L45 48 L50 58 L55 48 Z" />
-        </g>
-
-        <defs>
-          <linearGradient id="gl-gradient-light" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#00C853" />
-            <stop offset="50%" stop-color="#0091EA" />
-            <stop offset="100%" stop-color="#6200EA" />
-          </linearGradient>
-        </defs>
-      </svg>
-
-      <!-- Medium (56px) -->
-      <svg class="gl-orbital-spinner size-md" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g class="ring-outer">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#6200EA" stroke-width="2" stroke-dasharray="12 18 35 15" opacity="0.5"/>
-          <circle cx="50" cy="6" r="4" fill="#00C853" />
-        </g>
-        <g class="ring-inner">
-          <circle cx="50" cy="50" r="35" fill="none" stroke="#0091EA" stroke-width="2" stroke-dasharray="45 20" opacity="0.7"/>
-          <circle cx="15" cy="50" r="3.5" fill="#6200EA" />
-        </g>
-        <g class="logo-pulse">
-          <path fill="url(#gl-gradient-light)" d="M50 15 L18 85 L32 85 L44 58 L50 70 L56 58 L68 85 L82 85 Z M50 36 L45 48 L50 58 L55 48 Z" />
-        </g>
-      </svg>
-    </div>
-  </div>
+  <!-- OFFICIAL LOGO (The Triangle Shape) -->
+  <svg class="gl-logo-center" viewBox="0 0 100 100">
+    <!-- Ye path aapke diye gaye image ke exact triangular shape ko represent karta hai -->
+    <path d="M50 10 L 90 90 L 50 70 L 10 90 Z M50 30 L 35 70 L 65 70 Z" />
+  </svg>
+</div>
 
 </body>
 </html>
