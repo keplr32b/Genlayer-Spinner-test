@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GenLayer Loading Spinner - Community Submission</title>
+  <title>GenLayer Loading Spinner - Portal Community Design</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,13 +12,12 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: 100vh;
     }
 
-    /* Mobile Responsive Layout */
     @media (max-width: 768px) {
       body {
         grid-template-columns: 1fr;
@@ -31,56 +30,57 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 24px;
-      padding: 40px 20px;
+      gap: 20px;
+      padding: 40px;
     }
 
-    /* Dark Theme */
+    /* GenLayer Carbon Dark Mode */
     .dark-bg {
-      background-color: #070707;
-      color: #ffffff;
-      --track-color: rgba(255, 255, 255, 0.15);
+      background-color: #0B0F17;
+      color: #FFFFFF;
+      --track-color: rgba(255, 255, 255, 0.1);
     }
 
-    /* Light Theme */
+    /* Light Mode */
     .light-bg {
-      background-color: #ffffff;
-      color: #070707;
+      background-color: #F4F6F8;
+      color: #0B0F17;
       --track-color: rgba(0, 0, 0, 0.08);
     }
 
     .preview-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      opacity: 0.8;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      opacity: 0.7;
       text-transform: uppercase;
     }
 
-    /* Embedded SVG Animation Engine */
+    /* Spinner Container */
     .genlayer-spinner {
-      width: 80px;
-      height: 80px;
-      display: inline-block;
+      width: 90px;
+      height: 90px;
     }
 
+    /* Track Ring */
     .gl-track {
       fill: none;
-      stroke: var(--track-color, rgba(127, 127, 127, 0.2));
-      stroke-width: 5;
+      stroke: var(--track-color);
+      stroke-width: 4;
     }
 
+    /* Outer Spin Arc */
     .gl-arc {
       fill: none;
-      stroke-width: 5;
+      stroke-width: 4;
       stroke-linecap: round;
-      stroke-dasharray: 238;
-      stroke-dashoffset: 180;
+      stroke-dasharray: 220;
+      stroke-dashoffset: 160;
       transform-origin: 50px 50px;
-      animation: gl-spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      animation: gl-spin 1.3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 
-    .gl-core {
+    /* Center GenLayer Brand Diamonds */
+    .gl-logo-core {
       transform-origin: 50px 50px;
       animation: gl-pulse 1.8s ease-in-out infinite;
     }
@@ -88,25 +88,25 @@
     @keyframes gl-spin {
       0% {
         transform: rotate(0deg);
-        stroke-dashoffset: 200;
+        stroke-dashoffset: 180;
       }
       50% {
-        stroke-dashoffset: 60;
+        stroke-dashoffset: 50;
         transform: rotate(180deg);
       }
       100% {
         transform: rotate(360deg);
-        stroke-dashoffset: 200;
+        stroke-dashoffset: 180;
       }
     }
 
     @keyframes gl-pulse {
       0%, 100% {
-        transform: scale(0.85);
-        opacity: 0.8;
+        transform: scale(0.88);
+        opacity: 0.85;
       }
       50% {
-        transform: scale(1.08);
+        transform: scale(1.05);
         opacity: 1;
       }
     }
@@ -114,19 +114,20 @@
 </head>
 <body>
 
-  <!-- Dark Theme Preview -->
+  <!-- Dark Theme -->
   <div class="preview-card dark-bg">
     <h3>Dark Theme Preview</h3>
-    <svg class="genlayer-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="status" aria-label="Loading">
+    <svg class="genlayer-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="gl-gradient-dark" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#110FFF" />
-          <stop offset="50%" stop-color="#00FF66" />
-          <stop offset="100%" stop-color="#110FFF" />
+        <!-- GenLayer Official Electric Emerald to Cyan Gradient -->
+        <linearGradient id="gl-grad-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00FF88" />
+          <stop offset="50%" stop-color="#00E5FF" />
+          <stop offset="100%" stop-color="#7000FF" />
         </linearGradient>
 
-        <filter id="gl-glow-dark" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="2.5" result="blur" />
+        <filter id="gl-glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="2" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
@@ -134,30 +135,40 @@
         </filter>
       </defs>
 
-      <circle class="gl-track" cx="50" cy="50" r="38" />
-      <circle class="gl-arc" cx="50" cy="50" r="38" stroke="url(#gl-gradient-dark)" filter="url(#gl-glow-dark)" />
-      <g class="gl-core">
-        <polygon points="50,26 68,64 50,54 32,64" fill="url(#gl-gradient-dark)" />
+      <circle class="gl-track" cx="50" cy="50" r="36" />
+      <circle class="gl-arc" cx="50" cy="50" r="36" stroke="url(#gl-grad-dark)" filter="url(#gl-glow)" />
+
+      <!-- Authentic GenLayer Geometric Motif -->
+      <g class="gl-logo-core">
+        <polygon points="50,28 62,40 50,52 38,40" fill="url(#gl-grad-dark)" />
+        <polygon points="50,54 62,66 50,78 38,66" fill="url(#gl-grad-dark)" opacity="0.8" />
+        <polygon points="36,42 48,54 36,66 24,54" fill="url(#gl-grad-dark)" opacity="0.6" />
+        <polygon points="64,42 76,54 64,66 52,54" fill="url(#gl-grad-dark)" opacity="0.6" />
       </g>
     </svg>
   </div>
 
-  <!-- Light Theme Preview -->
+  <!-- Light Theme -->
   <div class="preview-card light-bg">
     <h3>Light Theme Preview</h3>
-    <svg class="genlayer-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="status" aria-label="Loading">
+    <svg class="genlayer-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="gl-gradient-light" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#110FFF" />
-          <stop offset="50%" stop-color="#00C853" />
-          <stop offset="100%" stop-color="#110FFF" />
+        <linearGradient id="gl-grad-light" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00C853" />
+          <stop offset="50%" stop-color="#0091EA" />
+          <stop offset="100%" stop-color="#6200EA" />
         </linearGradient>
       </defs>
 
-      <circle class="gl-track" cx="50" cy="50" r="38" />
-      <circle class="gl-arc" cx="50" cy="50" r="38" stroke="url(#gl-gradient-light)" />
-      <g class="gl-core">
-        <polygon points="50,26 68,64 50,54 32,64" fill="url(#gl-gradient-light)" />
+      <circle class="gl-track" cx="50" cy="50" r="36" />
+      <circle class="gl-arc" cx="50" cy="50" r="36" stroke="url(#gl-grad-light)" />
+
+      <!-- Authentic GenLayer Geometric Motif -->
+      <g class="gl-logo-core">
+        <polygon points="50,28 62,40 50,52 38,40" fill="url(#gl-grad-light)" />
+        <polygon points="50,54 62,66 50,78 38,66" fill="url(#gl-grad-light)" opacity="0.8" />
+        <polygon points="36,42 48,54 36,66 24,54" fill="url(#gl-grad-light)" opacity="0.6" />
+        <polygon points="64,42 76,54 64,66 52,54" fill="url(#gl-grad-light)" opacity="0.6" />
       </g>
     </svg>
   </div>
