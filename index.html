@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GenLayer Validator Interface</title>
+  <title>GenLayer Portal Loading States</title>
   <style>
     * {
       box-sizing: border-box;
@@ -111,7 +111,7 @@
       left: 0;
     }
 
-    /* LOGO POSITIONING & ALIGNMENT (EXACT GEOMETRY) */
+    /* LOGO POSITIONING & ALIGNMENT */
     .gl-logo-center {
       width: 25px;
       height: 25px;
@@ -122,23 +122,23 @@
       animation: rotate-cw 4s linear infinite;
     }
 
-    /* --- FLAWLESS SEAMLESS CSS ANIMATIONS --- */
+    /* --- SEAMLESS CSS ANIMATIONS --- */
 
-    /* 1. VERIFYING STATE: Counter-Rotation (Outer CW, Inner CCW) */
-    .verifying-spin .ring-outer {
+    /* 1. LOADING PAGE STATE: Smooth Counter-Rotation */
+    .loading-page-spin .ring-outer {
       animation: rotate-cw 3s linear infinite;
     }
 
-    .verifying-spin .ring-inner {
+    .loading-page-spin .ring-inner {
       animation: rotate-ccw 2s linear infinite;
     }
 
-    /* 2. RESOLVING STATE: Speed Differential Flow (Ratio 1:2) */
-    .resolving-spin .ring-outer {
+    /* 2. LOADING STATE: Speed Differential Flow */
+    .loading-state-spin .ring-outer {
       animation: rotate-cw 1.8s linear infinite;
     }
 
-    .resolving-spin .ring-inner {
+    .loading-state-spin .ring-inner {
       animation: rotate-cw 3.6s linear infinite;
     }
 
@@ -163,13 +163,13 @@
       <div class="status-dot"></div>
     </div>
 
-    <!-- Verifying State Row -->
+    <!-- Loading Page Row -->
     <div class="state-row">
       <div class="state-info">
-        <h4>Verifying state</h4>
-        <p>Validator signals are converging.</p>
+        <h4>Loading page...</h4>
+        <p>Fetching portal data.</p>
       </div>
-      <div class="spinner-wrapper verifying-spin">
+      <div class="spinner-wrapper loading-page-spin">
         <svg class="ring-outer" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="45" fill="none" stroke="#00FF88" stroke-width="2" stroke-dasharray="10 20" />
         </svg>
@@ -182,13 +182,13 @@
       </div>
     </div>
 
-    <!-- Resolving Result State Row -->
+    <!-- Loading State Row -->
     <div class="state-row">
       <div class="state-info">
-        <h4>Resolving result</h4>
-        <p>Waiting for collective agreement.</p>
+        <h4>Loading state...</h4>
+        <p>Processing transaction action.</p>
       </div>
-      <div class="spinner-wrapper resolving-spin">
+      <div class="spinner-wrapper loading-state-spin">
         <svg class="ring-outer" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="45" fill="none" stroke="#00FF88" stroke-width="2" stroke-dasharray="10 20" />
         </svg>
@@ -209,13 +209,13 @@
       <div class="status-dot"></div>
     </div>
 
-    <!-- Verifying State Row -->
+    <!-- Loading Page Row -->
     <div class="state-row">
       <div class="state-info">
-        <h4>Verifying state</h4>
-        <p>Validator signals are converging.</p>
+        <h4>Loading page...</h4>
+        <p>Fetching portal data.</p>
       </div>
-      <div class="spinner-wrapper verifying-spin">
+      <div class="spinner-wrapper loading-page-spin">
         <svg class="ring-outer" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="45" fill="none" stroke="#6200EA" stroke-width="2" stroke-dasharray="10 20" />
         </svg>
@@ -228,13 +228,13 @@
       </div>
     </div>
 
-    <!-- Resolving Result State Row -->
+    <!-- Loading State Row -->
     <div class="state-row">
       <div class="state-info">
-        <h4>Resolving result</h4>
-        <p>Waiting for collective agreement.</p>
+        <h4>Loading state...</h4>
+        <p>Processing transaction action.</p>
       </div>
-      <div class="spinner-wrapper resolving-spin">
+      <div class="spinner-wrapper loading-state-spin">
         <svg class="ring-outer" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="45" fill="none" stroke="#6200EA" stroke-width="2" stroke-dasharray="10 20" />
         </svg>
