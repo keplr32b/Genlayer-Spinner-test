@@ -24,7 +24,7 @@
       color: #ffffff;
     }
 
-    /* CARD CONTAINER (ORIGINAL EXACT LAYOUT) */
+    /* CARD CONTAINER */
     .card {
       width: 420px;
       border-radius: 28px;
@@ -91,7 +91,7 @@
       opacity: 0.5;
     }
 
-    /* EXACT ORIGINAL SPINNER WRAPPER & ALIGNMENT */
+    /* SPINNER WRAPPER & ALIGNMENT */
     .spinner-wrapper {
       width: 60px;
       height: 60px;
@@ -111,7 +111,7 @@
       left: 0;
     }
 
-    /* EXACT ORIGINAL LOGO POSITIONING & ALIGNMENT */
+    /* LOGO POSITIONING (EXACT GEOMETRY) */
     .gl-logo-center {
       width: 25px;
       height: 25px;
@@ -119,16 +119,12 @@
       transform-origin: 50% 50%;
       position: relative;
       z-index: 2;
-    }
-
-    /* --- ANIMATIONS ONLY --- */
-
-    /* Logo Center Rotation */
-    .gl-logo-center {
       animation: rotate-cw 3.5s linear infinite;
     }
 
-    /* 1. VERIFYING STATE: Unique Variable Speed (Easing) */
+    /* --- ANIMATION LOGIC --- */
+
+    /* 1. VERIFYING STATE: Counter-rotation with Easing */
     .verifying-spin .ring-outer {
       animation: rotate-smooth 4s ease-in-out infinite;
     }
@@ -137,10 +133,13 @@
       animation: rotate-smooth 3s ease-in-out infinite reverse;
     }
 
-    /* 2. RESOLVING STATE: 1 Turn Spin + 2-3 Sec Pause */
-    .resolving-spin .ring-outer,
+    /* 2. RESOLVING STATE: Pulsing-Flow (Smooth Infinite Motion without Hard Stop) */
+    .resolving-spin .ring-outer {
+      animation: rotate-pulse-flow 2.8s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+    }
+
     .resolving-spin .ring-inner {
-      animation: rotate-pause 4.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+      animation: rotate-pulse-flow 2.2s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
     }
 
     /* KEYFRAMES */
@@ -155,10 +154,10 @@
       100% { transform: rotate(360deg); }
     }
 
-    @keyframes rotate-pause {
-      0% { transform: rotate(0deg); }
-      25% { transform: rotate(360deg); } /* Quick round spin */
-      100% { transform: rotate(360deg); } /* Full Pause */
+    @keyframes rotate-pulse-flow {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.05); }
+      100% { transform: rotate(360deg) scale(1); }
     }
   </style>
 </head>
