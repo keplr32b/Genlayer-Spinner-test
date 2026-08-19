@@ -5,30 +5,148 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GenLayer Validator Interface</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: #030408; font-family: sans-serif; display: flex; gap: 24px; padding: 40px 20px; justify-content: center; align-items: center; min-height: 100vh; color: #ffffff; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    .card { width: 440px; border-radius: 28px; padding: 32px; border: 1px solid #1f2937; display: flex; flex-direction: column; gap: 32px; }
-    .card.dark { background: #0b0f17; }
-    .card.light { background: #ffffff; color: #0b0f17; border-color: #e2e8f0; }
+    body {
+      background-color: #030408;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 40px 20px;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #ffffff;
+    }
 
-    .state-row { display: flex; align-items: center; justify-content: space-between; }
-    .state-info h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
-    .state-info p { font-size: 0.85rem; opacity: 0.5; }
+    /* CARD CONTAINER (ORIGINAL EXACT LAYOUT) */
+    .card {
+      width: 420px;
+      border-radius: 28px;
+      padding: 32px;
+      border: 1px solid #1f2937;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
 
-    .spinner-wrapper { width: 64px; height: 64px; position: relative; display: flex; align-items: center; justify-content: center; }
-    .ring { position: absolute; width: 100%; height: 100%; }
+    .card.dark {
+      background: #0b0f17;
+      border-color: #1e2638;
+      color: #ffffff;
+    }
 
-    /* --- UNIQUE ANIMATIONS --- */
+    .card.light {
+      background: #ffffff;
+      border-color: #e2e8f0;
+      color: #0b0f17;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    }
 
-    /* 1. VERIFYING: "Breathing/Thinking" Rotation (Easing) */
-    .verifying-spin .ring-outer { animation: rotate-smooth 4s ease-in-out infinite; }
-    .verifying-spin .ring-inner { animation: rotate-smooth 4s ease-in-out infinite reverse; }
+    /* CARD HEADER */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
 
-    /* 2. RESOLVING: "Burst & Pause" Rotation (Steps) */
-    .resolving-spin .ring-outer, 
-    .resolving-spin .ring-inner { 
-      animation: rotate-pause 5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; 
+    .card.light .card-header {
+      color: #475569;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #3b82f6;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #3b82f6;
+    }
+
+    /* STATE ROW */
+    .state-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .state-info h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .state-info p {
+      font-size: 0.85rem;
+      opacity: 0.5;
+    }
+
+    /* EXACT ORIGINAL SPINNER WRAPPER & ALIGNMENT */
+    .spinner-wrapper {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ring-outer, 
+    .ring-inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    /* EXACT ORIGINAL LOGO POSITIONING & ALIGNMENT */
+    .gl-logo-center {
+      width: 25px;
+      height: 25px;
+      fill: currentColor;
+      transform-origin: 50% 50%;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* --- ANIMATIONS ONLY --- */
+
+    /* Logo Center Rotation */
+    .gl-logo-center {
+      animation: rotate-cw 3.5s linear infinite;
+    }
+
+    /* 1. VERIFYING STATE: Unique Variable Speed (Easing) */
+    .verifying-spin .ring-outer {
+      animation: rotate-smooth 4s ease-in-out infinite;
+    }
+
+    .verifying-spin .ring-inner {
+      animation: rotate-smooth 3s ease-in-out infinite reverse;
+    }
+
+    /* 2. RESOLVING STATE: 1 Turn Spin + 2-3 Sec Pause */
+    .resolving-spin .ring-outer,
+    .resolving-spin .ring-inner {
+      animation: rotate-pause 4.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    }
+
+    /* KEYFRAMES */
+    @keyframes rotate-cw {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     @keyframes rotate-smooth {
@@ -39,67 +157,101 @@
 
     @keyframes rotate-pause {
       0% { transform: rotate(0deg); }
-      30% { transform: rotate(360deg); } /* Fast spin */
-      100% { transform: rotate(360deg); } /* Pause here */
+      25% { transform: rotate(360deg); } /* Quick round spin */
+      100% { transform: rotate(360deg); } /* Full Pause */
     }
-
-    /* Logo stays standard */
-    .gl-logo-center { width: 26px; height: 26px; fill: currentColor; transform-origin: center; animation: rotate-cw 3s linear infinite; }
-    @keyframes rotate-cw { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
 
-  <!-- DARK CARD -->
+  <!-- DARK INTERFACE CARD -->
   <div class="card dark">
+    <div class="card-header">
+      <span>DARK INTERFACE</span>
+      <div class="status-dot"></div>
+    </div>
+
+    <!-- Verifying State Row -->
     <div class="state-row">
       <div class="state-info">
         <h4>Verifying state</h4>
-        <p>Crunching validator signals...</p>
+        <p>Validator signals are converging.</p>
       </div>
       <div class="spinner-wrapper verifying-spin">
-        <svg class="ring ring-outer" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#00FF88" stroke-width="3" stroke-dasharray="10 20" /></svg>
-        <svg class="ring ring-inner" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#00E5FF" stroke-width="3" stroke-dasharray="6 14" /></svg>
-        <svg class="gl-logo-center" viewBox="0 0 100 100"><path d="M50 10 L 90 90 L 50 70 L 10 90 Z M50 30 L 35 70 L 65 70 Z" /></svg>
+        <svg class="ring-outer" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#00FF88" stroke-width="2" stroke-dasharray="10 20" />
+        </svg>
+        <svg class="ring-inner" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#00E5FF" stroke-width="2" stroke-dasharray="5 15" />
+        </svg>
+        <svg class="gl-logo-center" viewBox="0 0 100 100">
+          <path d="M50 10 L 90 90 L 50 70 L 10 90 Z M50 30 L 35 70 L 65 70 Z" />
+        </svg>
       </div>
     </div>
 
+    <!-- Resolving Result State Row -->
     <div class="state-row">
       <div class="state-info">
         <h4>Resolving result</h4>
-        <p>Finalizing collective consensus.</p>
+        <p>Waiting for collective agreement.</p>
       </div>
       <div class="spinner-wrapper resolving-spin">
-        <svg class="ring ring-outer" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#00FF88" stroke-width="3" stroke-dasharray="12 18" /></svg>
-        <svg class="ring-inner" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#00E5FF" stroke-width="3" stroke-dasharray="8 12" /></svg>
-        <svg class="gl-logo-center" viewBox="0 0 100 100"><path d="M50 10 L 90 90 L 50 70 L 10 90 Z M50 30 L 35 70 L 65 70 Z" /></svg>
+        <svg class="ring-outer" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#00FF88" stroke-width="2" stroke-dasharray="10 20" />
+        </svg>
+        <svg class="ring-inner" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#00E5FF" stroke-width="2" stroke-dasharray="5 15" />
+        </svg>
+        <svg class="gl-logo-center" viewBox="0 0 100 100">
+          <path d="M50 10 L 90 90 L 50 70 L 10 90 Z M50 30 L 35 70 L 65 70 Z" />
+        </svg>
       </div>
     </div>
   </div>
 
-  <!-- LIGHT CARD (Same logic applies) -->
+  <!-- LIGHT INTERFACE CARD -->
   <div class="card light">
+    <div class="card-header">
+      <span>LIGHT INTERFACE</span>
+      <div class="status-dot"></div>
+    </div>
+
+    <!-- Verifying State Row -->
     <div class="state-row">
       <div class="state-info">
         <h4>Verifying state</h4>
-        <p>Crunching validator signals...</p>
+        <p>Validator signals are converging.</p>
       </div>
       <div class="spinner-wrapper verifying-spin">
-        <svg class="ring ring-outer" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#6200EA" stroke-width="3" stroke-dasharray="10 20" /></svg>
-        <svg class="ring-inner" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#0091EA" stroke-width="3" stroke-dasharray="6 14" /></svg>
-        <svg class="gl-logo-center" viewBox="0 0 100 100"><path d="M50 10 L 90 90 L 50 70 L 10 90 Z M50 30 L 35 70 L 65 70 Z" /></svg>
+        <svg class="ring-outer" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#6200EA" stroke-width="2" stroke-dasharray="10 20" />
+        </svg>
+        <svg class="ring-inner" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#0091EA" stroke-width="2" stroke-dasharray="5 15" />
+        </svg>
+        <svg class="gl-logo-center" viewBox="0 0 100 100">
+          <path d="M50 10 L 90 90 L 50 70 L 10 90 Z M50 30 L 35 70 L 65 70 Z" />
+        </svg>
       </div>
     </div>
 
+    <!-- Resolving Result State Row -->
     <div class="state-row">
       <div class="state-info">
         <h4>Resolving result</h4>
-        <p>Finalizing collective consensus.</p>
+        <p>Waiting for collective agreement.</p>
       </div>
       <div class="spinner-wrapper resolving-spin">
-        <svg class="ring ring-outer" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#6200EA" stroke-width="3" stroke-dasharray="12 18" /></svg>
-        <svg class="ring-inner" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#0091EA" stroke-width="3" stroke-dasharray="8 12" /></svg>
-        <svg class="gl-logo-center" viewBox="0 0 100 100"><path d="M50 10 L 90 90 L 50 70 L 10 90 Z M50 30 L 35 70 L 65 70 Z" /></svg>
+        <svg class="ring-outer" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#6200EA" stroke-width="2" stroke-dasharray="10 20" />
+        </svg>
+        <svg class="ring-inner" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#0091EA" stroke-width="2" stroke-dasharray="5 15" />
+        </svg>
+        <svg class="gl-logo-center" viewBox="0 0 100 100">
+          <path d="M50 10 L 90 90 L 50 70 L 10 90 Z M50 30 L 35 70 L 65 70 Z" />
+        </svg>
       </div>
     </div>
   </div>
