@@ -111,7 +111,7 @@
       left: 0;
     }
 
-    /* LOGO POSITIONING (EXACT GEOMETRY) */
+    /* LOGO POSITIONING & ALIGNMENT (EXACT GEOMETRY) */
     .gl-logo-center {
       width: 25px;
       height: 25px;
@@ -119,27 +119,27 @@
       transform-origin: 50% 50%;
       position: relative;
       z-index: 2;
-      animation: rotate-cw 3.5s linear infinite;
+      animation: rotate-cw 4s linear infinite;
     }
 
-    /* --- ANIMATION LOGIC --- */
+    /* --- FLAWLESS SEAMLESS CSS ANIMATIONS --- */
 
-    /* 1. VERIFYING STATE: Counter-rotation with Easing */
+    /* 1. VERIFYING STATE: Counter-Rotation (Outer CW, Inner CCW) */
     .verifying-spin .ring-outer {
-      animation: rotate-smooth 4s ease-in-out infinite;
+      animation: rotate-cw 3s linear infinite;
     }
 
     .verifying-spin .ring-inner {
-      animation: rotate-smooth 3s ease-in-out infinite reverse;
+      animation: rotate-ccw 2s linear infinite;
     }
 
-    /* 2. RESOLVING STATE: Pulsing-Flow (Smooth Infinite Motion without Hard Stop) */
+    /* 2. RESOLVING STATE: Speed Differential Flow (Ratio 1:2) */
     .resolving-spin .ring-outer {
-      animation: rotate-pulse-flow 2.8s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+      animation: rotate-cw 1.8s linear infinite;
     }
 
     .resolving-spin .ring-inner {
-      animation: rotate-pulse-flow 2.2s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+      animation: rotate-cw 3.6s linear infinite;
     }
 
     /* KEYFRAMES */
@@ -148,16 +148,9 @@
       100% { transform: rotate(360deg); }
     }
 
-    @keyframes rotate-smooth {
+    @keyframes rotate-ccw {
       0% { transform: rotate(0deg); }
-      50% { transform: rotate(180deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @keyframes rotate-pulse-flow {
-      0% { transform: rotate(0deg) scale(1); }
-      50% { transform: rotate(180deg) scale(1.05); }
-      100% { transform: rotate(360deg) scale(1); }
+      100% { transform: rotate(-360deg); }
     }
   </style>
 </head>
