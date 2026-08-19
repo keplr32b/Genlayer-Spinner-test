@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GenLayer Animated Orbital Spinner</title>
+  <title>GenLayer Official Animated Spinner</title>
   <style>
     * {
       box-sizing: border-box;
@@ -39,12 +39,14 @@
     .dark-bg {
       background-color: #0b0f17;
       color: #ffffff;
+      --logo-color: #ffffff;
     }
 
     /* Light Mode */
     .light-bg {
       background-color: #f8fafc;
       color: #0b0f17;
+      --logo-color: #0b0f17;
     }
 
     .preview-card h3 {
@@ -54,26 +56,26 @@
       text-transform: uppercase;
     }
 
-    /* Multi-Size Showcase Container */
+    /* Showcase Container */
     .spinner-showcase {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
+      gap: 32px;
     }
 
-    /* Main SVG Container Base */
+    /* Base SVG Setup */
     .gl-orbital-spinner {
       display: inline-block;
       overflow: visible;
     }
 
-    /* Sizing Utilities */
-    .size-lg { width: 100px; height: 100px; }
-    .size-md { width: 64px; height: 64px; }
-    .size-sm { width: 36px; height: 36px; }
+    /* Sizing Variants */
+    .size-lg { width: 90px; height: 90px; }
+    .size-md { width: 56px; height: 56px; }
+    .size-sm { width: 28px; height: 28px; }
 
-    /* Orbital Motion System */
+    /* Orbital Rotations */
     .ring-outer {
       transform-origin: 50px 50px;
       animation: spin-clockwise 3s linear infinite;
@@ -84,7 +86,7 @@
       animation: spin-counter-clockwise 2.2s linear infinite;
     }
 
-    .core-pulse {
+    .logo-pulse {
       transform-origin: 50px 50px;
       animation: core-breathe 2s ease-in-out infinite;
     }
@@ -101,7 +103,7 @@
     }
 
     @keyframes core-breathe {
-      0%, 100% { transform: scale(0.92); opacity: 0.9; }
+      0%, 100% { transform: scale(0.92); opacity: 0.85; }
       50% { transform: scale(1.05); opacity: 1; }
     }
   </style>
@@ -112,51 +114,49 @@
   <div class="preview-card dark-bg">
     <h3>Dark Theme Preview</h3>
     <div class="spinner-showcase">
-      <!-- Large (100px) -->
+      <!-- Large (90px) -->
       <svg class="gl-orbital-spinner size-lg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <!-- Outer Rotating Ring & Nodes -->
+        <!-- Outer Rotating Orbit & Nodes -->
         <g class="ring-outer">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#7000FF" stroke-width="1.5" stroke-dasharray="10 15 30 15" opacity="0.6"/>
-          <circle cx="50" cy="8" r="3.5" fill="#00FF88" />
-          <circle cx="92" cy="50" r="2.5" fill="#00E5FF" />
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#7000FF" stroke-width="1.5" stroke-dasharray="12 18 35 15" opacity="0.6"/>
+          <circle cx="50" cy="6" r="3.5" fill="#00FF88" />
+          <circle cx="94" cy="50" r="2.5" fill="#00E5FF" />
         </g>
 
-        <!-- Inner Counter-Rotating Ring & Nodes -->
+        <!-- Inner Counter-Rotating Orbit & Nodes -->
         <g class="ring-inner">
-          <circle cx="50" cy="50" r="32" fill="none" stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="40 20" stroke-linecap="round" opacity="0.8"/>
-          <circle cx="18" cy="50" r="3" fill="#7000FF" />
-          <circle cx="50" cy="82" r="2" fill="#00FF88" />
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="45 20" stroke-linecap="round" opacity="0.8"/>
+          <circle cx="15" cy="50" r="3" fill="#7000FF" />
+          <circle cx="50" cy="85" r="2" fill="#00FF88" />
         </g>
 
-        <!-- Center Isometric GenLayer Cube / Diamond -->
-        <g class="core-pulse">
-          <!-- Top Face -->
-          <polygon points="50,26 66,35 50,44 34,35" fill="#00FF88" opacity="0.9"/>
-          <!-- Left Face -->
-          <polygon points="34,35 50,44 50,64 34,55" fill="#00E5FF" opacity="0.8"/>
-          <!-- Right Face -->
-          <polygon points="50,44 66,35 66,55 50,64" fill="#7000FF" opacity="0.85"/>
-          <!-- Inner Node Lines -->
-          <line x1="50" y1="44" x2="50" y2="64" stroke="#0b0f17" stroke-width="1.5"/>
-          <line x1="50" y1="44" x2="34" y2="35" stroke="#0b0f17" stroke-width="1.5"/>
-          <line x1="50" y1="44" x2="66" y2="35" stroke="#0b0f17" stroke-width="1.5"/>
+        <!-- Official GenLayer Logo Path -->
+        <g class="logo-pulse">
+          <path fill="url(#gl-gradient-dark)" d="M50 8 L10 92 L38 92 L44 78 L50 88 L56 78 L62 92 L90 92 Z M50 28 L44 42 L50 54 L56 42 Z M44 60 L50 72 L56 60 Z" />
+          <path fill="var(--logo-color)" d="M50 15 L18 85 L32 85 L44 58 L50 70 L56 58 L68 85 L82 85 Z M50 36 L45 48 L50 58 L55 48 Z" />
         </g>
+
+        <defs>
+          <linearGradient id="gl-gradient-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00FF88" />
+            <stop offset="50%" stop-color="#00E5FF" />
+            <stop offset="100%" stop-color="#7000FF" />
+          </linearGradient>
+        </defs>
       </svg>
 
-      <!-- Medium (64px) -->
+      <!-- Medium (56px) -->
       <svg class="gl-orbital-spinner size-md" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <g class="ring-outer">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#7000FF" stroke-width="2" stroke-dasharray="10 15 30 15" opacity="0.6"/>
-          <circle cx="50" cy="8" r="4" fill="#00FF88" />
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#7000FF" stroke-width="2" stroke-dasharray="12 18 35 15" opacity="0.6"/>
+          <circle cx="50" cy="6" r="4" fill="#00FF88" />
         </g>
         <g class="ring-inner">
-          <circle cx="50" cy="50" r="32" fill="none" stroke="#00E5FF" stroke-width="2" stroke-dasharray="40 20" opacity="0.8"/>
-          <circle cx="18" cy="50" r="3.5" fill="#7000FF" />
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#00E5FF" stroke-width="2" stroke-dasharray="45 20" opacity="0.8"/>
+          <circle cx="15" cy="50" r="3.5" fill="#7000FF" />
         </g>
-        <g class="core-pulse">
-          <polygon points="50,26 66,35 50,44 34,35" fill="#00FF88" />
-          <polygon points="34,35 50,44 50,64 34,55" fill="#00E5FF" />
-          <polygon points="50,44 66,35 66,55 50,64" fill="#7000FF" />
+        <g class="logo-pulse">
+          <path fill="url(#gl-gradient-dark)" d="M50 15 L18 85 L32 85 L44 58 L50 70 L56 58 L68 85 L82 85 Z M50 36 L45 48 L50 58 L55 48 Z" />
         </g>
       </svg>
     </div>
@@ -166,44 +166,46 @@
   <div class="preview-card light-bg">
     <h3>Light Theme Preview</h3>
     <div class="spinner-showcase">
-      <!-- Large (100px) -->
+      <!-- Large (90px) -->
       <svg class="gl-orbital-spinner size-lg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <g class="ring-outer">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#6200EA" stroke-width="1.5" stroke-dasharray="10 15 30 15" opacity="0.5"/>
-          <circle cx="50" cy="8" r="3.5" fill="#00C853" />
-          <circle cx="92" cy="50" r="2.5" fill="#0091EA" />
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#6200EA" stroke-width="1.5" stroke-dasharray="12 18 35 15" opacity="0.5"/>
+          <circle cx="50" cy="6" r="3.5" fill="#00C853" />
+          <circle cx="94" cy="50" r="2.5" fill="#0091EA" />
         </g>
 
         <g class="ring-inner">
-          <circle cx="50" cy="50" r="32" fill="none" stroke="#0091EA" stroke-width="1.5" stroke-dasharray="40 20" stroke-linecap="round" opacity="0.7"/>
-          <circle cx="18" cy="50" r="3" fill="#6200EA" />
-          <circle cx="50" cy="82" r="2" fill="#00C853" />
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#0091EA" stroke-width="1.5" stroke-dasharray="45 20" stroke-linecap="round" opacity="0.7"/>
+          <circle cx="15" cy="50" r="3" fill="#6200EA" />
+          <circle cx="50" cy="85" r="2" fill="#00C853" />
         </g>
 
-        <g class="core-pulse">
-          <polygon points="50,26 66,35 50,44 34,35" fill="#00C853" />
-          <polygon points="34,35 50,44 50,64 34,55" fill="#0091EA" />
-          <polygon points="50,44 66,35 66,55 50,64" fill="#6200EA" />
-          <line x1="50" y1="44" x2="50" y2="64" stroke="#ffffff" stroke-width="1.5"/>
-          <line x1="50" y1="44" x2="34" y2="35" stroke="#ffffff" stroke-width="1.5"/>
-          <line x1="50" y1="44" x2="66" y2="35" stroke="#ffffff" stroke-width="1.5"/>
+        <g class="logo-pulse">
+          <path fill="url(#gl-gradient-light)" d="M50 8 L10 92 L38 92 L44 78 L50 88 L56 78 L62 92 L90 92 Z M50 28 L44 42 L50 54 L56 42 Z M44 60 L50 72 L56 60 Z" />
+          <path fill="var(--logo-color)" d="M50 15 L18 85 L32 85 L44 58 L50 70 L56 58 L68 85 L82 85 Z M50 36 L45 48 L50 58 L55 48 Z" />
         </g>
+
+        <defs>
+          <linearGradient id="gl-gradient-light" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00C853" />
+            <stop offset="50%" stop-color="#0091EA" />
+            <stop offset="100%" stop-color="#6200EA" />
+          </linearGradient>
+        </defs>
       </svg>
 
-      <!-- Medium (64px) -->
+      <!-- Medium (56px) -->
       <svg class="gl-orbital-spinner size-md" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <g class="ring-outer">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#6200EA" stroke-width="2" stroke-dasharray="10 15 30 15" opacity="0.5"/>
-          <circle cx="50" cy="8" r="4" fill="#00C853" />
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#6200EA" stroke-width="2" stroke-dasharray="12 18 35 15" opacity="0.5"/>
+          <circle cx="50" cy="6" r="4" fill="#00C853" />
         </g>
         <g class="ring-inner">
-          <circle cx="50" cy="50" r="32" fill="none" stroke="#0091EA" stroke-width="2" stroke-dasharray="40 20" opacity="0.7"/>
-          <circle cx="18" cy="50" r="3.5" fill="#6200EA" />
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#0091EA" stroke-width="2" stroke-dasharray="45 20" opacity="0.7"/>
+          <circle cx="15" cy="50" r="3.5" fill="#6200EA" />
         </g>
-        <g class="core-pulse">
-          <polygon points="50,26 66,35 50,44 34,35" fill="#00C853" />
-          <polygon points="34,35 50,44 50,64 34,55" fill="#0091EA" />
-          <polygon points="50,44 66,35 66,55 50,64" fill="#6200EA" />
+        <g class="logo-pulse">
+          <path fill="url(#gl-gradient-light)" d="M50 15 L18 85 L32 85 L44 58 L50 70 L56 58 L68 85 L82 85 Z M50 36 L45 48 L50 58 L55 48 Z" />
         </g>
       </svg>
     </div>
