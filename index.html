@@ -6,29 +6,38 @@
   <meta name="theme-color" content="#070707">
   <title>GenLayer Consensus Orbit Spinner</title>
 
-  <!-- NEXT STEP: spinner.css file add karne ke baad ye stylesheet load hogi -->
   <link rel="stylesheet" href="spinner.css">
 
   <style>
     :root {
       color-scheme: dark;
-      --cobalt: #110FFF;
+      --cobalt: #110fff;
       --void: #070707;
-      --ceramic: #F5F5F5;
-      --graphite: #303030;
-      --asphalt: #696969;
+      --ceramic: #f5f5f5;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html,
     body {
-      margin: 0;
+      overflow-x: hidden;
+    }
+
+    body {
       min-width: 320px;
+      margin: 0;
       background: var(--void);
       color: #ffffff;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
     }
 
     .page {
@@ -49,6 +58,7 @@
       width: 25px;
       height: 25px;
       fill: #ffffff;
+      flex: 0 0 auto;
     }
 
     .masthead strong {
@@ -155,11 +165,16 @@
       flex: 1;
       display: grid;
       place-items: center;
+      min-height: 220px;
+    }
+
+    .hero-loader .gl-spinner {
+      --gl-spinner-size: 96px;
     }
 
     .surface-copy {
       display: flex;
-      align-items: end;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 16px;
       padding-top: 18px;
@@ -271,6 +286,7 @@
 
     pre {
       overflow: auto;
+      max-width: 100%;
       margin: 0;
       padding: 18px;
       border: 1px solid rgba(255, 255, 255, 0.22);
@@ -279,6 +295,12 @@
       color: #ffffff;
       font-size: 12px;
       line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     }
 
     .sr-only {
@@ -296,11 +318,24 @@
     @media (max-width: 760px) {
       .page {
         width: min(100% - 24px, 1120px);
-        padding-top: 24px;
+        padding: 24px 0 40px;
+      }
+
+      .masthead {
+        padding-bottom: 24px;
+      }
+
+      .eyebrow {
+        display: none;
       }
 
       h1 {
         margin-top: 45px;
+        font-size: clamp(42px, 15vw, 72px);
+      }
+
+      .intro {
+        font-size: 16px;
       }
 
       .principles,
@@ -311,10 +346,56 @@
 
       .surface {
         min-height: 360px;
+        padding: 20px;
       }
 
-      .eyebrow {
-        display: none;
+      .hero-loader {
+        min-height: 190px;
+      }
+
+      .hero-loader .gl-spinner {
+        --gl-spinner-size: 82px;
+      }
+
+      .states {
+        padding: 20px;
+      }
+
+      .states-heading {
+        display: block;
+      }
+
+      .states-heading h2 {
+        margin-bottom: 8px;
+        font-size: 23px;
+      }
+
+      .state {
+        min-height: 110px;
+      }
+
+      .code {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .page {
+        width: calc(100% - 20px);
+      }
+
+      .surface-copy {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .state {
+        padding: 15px;
+      }
+
+      .state p {
+        max-width: 180px;
+        font-size: 12px;
       }
     }
   </style>
@@ -337,8 +418,9 @@
       <h1>Consensus,<br>in motion.</h1>
 
       <p class="intro">
-        A compact loading system for GenLayer Portal. Three phased signals continuously circulate a stable,
-        official GenLayer symbol—an original interpretation of validators resolving toward shared state.
+        A compact loading system for GenLayer Portal. Three phased signals continuously
+        circulate a stable, official GenLayer symbol—an original interpretation of
+        validators resolving toward shared state.
       </p>
 
       <div class="principles">
@@ -353,8 +435,8 @@
         <article class="principle">
           <b>Motion with meaning</b>
           <p>
-            Three independently phased orbit segments form a continuous consensus signal
-            rather than a static dashed ring.
+            Three independently phased orbit segments form a continuous consensus
+            signal rather than a static dashed ring.
           </p>
         </article>
 
@@ -378,7 +460,7 @@
         <div class="hero-loader">
           <div
             class="gl-spinner gl-spinner--on-dark"
-            style="--gl-spinner-size: 112px"
+            style="--gl-spinner-size: 96px"
             role="status"
             aria-label="Loading portal data"
           >
@@ -388,7 +470,7 @@
               <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-              <g class="gl-symbol" transform="translate(25.12 26.5) scale(.508)">
+              <g class="gl-symbol" transform="translate(33.37 34.53) scale(.32)">
                 <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
                 <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
                 <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
@@ -404,7 +486,7 @@
             <h2>Loading Portal</h2>
             <p>Fetching network state and workspace data.</p>
           </div>
-          <span class="tag">112px</span>
+          <span class="tag">96px</span>
         </div>
       </article>
 
@@ -417,7 +499,7 @@
         <div class="hero-loader">
           <div
             class="gl-spinner"
-            style="--gl-spinner-size: 112px"
+            style="--gl-spinner-size: 96px"
             role="status"
             aria-label="Loading portal data"
           >
@@ -427,7 +509,7 @@
               <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-              <g class="gl-symbol" transform="translate(25.12 26.5) scale(.508)">
+              <g class="gl-symbol" transform="translate(33.37 34.53) scale(.32)">
                 <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
                 <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
                 <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
@@ -443,7 +525,7 @@
             <h2>Loading Portal</h2>
             <p>Fetching network state and workspace data.</p>
           </div>
-          <span class="tag">112px</span>
+          <span class="tag">96px</span>
         </div>
       </article>
     </section>
@@ -473,7 +555,7 @@
               <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-              <g class="gl-symbol" transform="translate(25.12 26.5) scale(.508)">
+              <g class="gl-symbol" transform="translate(33.37 34.53) scale(.32)">
                 <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
                 <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
                 <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
@@ -502,7 +584,7 @@
               <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-              <g class="gl-symbol" transform="translate(25.12 26.5) scale(.508)">
+              <g class="gl-symbol" transform="translate(33.37 34.53) scale(.32)">
                 <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
                 <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
                 <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
@@ -531,7 +613,7 @@
               <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-              <g class="gl-symbol" transform="translate(25.12 26.5) scale(.508)">
+              <g class="gl-symbol" transform="translate(33.37 34.53) scale(.32)">
                 <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
                 <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
                 <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
