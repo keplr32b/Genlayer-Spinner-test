@@ -1,56 +1,36 @@
-/*
-  GenLayer Consensus Orbit Spinner
-  --------------------------------
-  Reusable CSS/SVG loader component.
-
-  Use:
-  <div class="gl-spinner gl-spinner--on-dark"
-       style="--gl-spinner-size: 40px"
-       role="status"
-       aria-label="Loading">
-    ...spinner SVG...
-  </div>
-*/
+/* GenLayer Portal Consensus Orbit Spinner */
 
 .gl-spinner {
   --gl-spinner-size: 40px;
-  --gl-spinner-accent: #110fff; /* GenLayer Kinetic Cobalt */
-  --gl-spinner-ink: #070707;    /* Carbon Void for light surfaces */
+  --gl-spinner-accent: #110fff;
+  --gl-spinner-ink: #070707;
 
   inline-size: var(--gl-spinner-size);
   block-size: var(--gl-spinner-size);
   display: inline-grid;
-  flex: 0 0 auto;
   place-items: center;
+  flex: 0 0 auto;
   color: var(--gl-spinner-ink);
 }
 
-/* Use this modifier wherever the surrounding surface is dark. */
 .gl-spinner--on-dark {
   --gl-spinner-ink: #ffffff;
 }
 
 .gl-spinner svg {
   display: block;
-  inline-size: 100%;
-  block-size: 100%;
+  width: 100%;
+  height: 100%;
   overflow: visible;
 }
 
-/* Low-contrast fixed orbit track: visible in both themes. */
 .gl-spinner .gl-track {
   fill: none;
   stroke: currentColor;
-  stroke-opacity: 0.14;
-  stroke-width: 4.5;
+  stroke-opacity: 0.16;
+  stroke-width: 4;
 }
 
-/*
-  Three separate signals:
-  each has a different length, opacity, and phase offset.
-  This creates a continuous “consensus orbit” rather than
-  a default single rotating circle.
-*/
 .gl-spinner .gl-orbit {
   fill: none;
   stroke: var(--gl-spinner-accent);
@@ -61,38 +41,29 @@
 }
 
 .gl-spinner .gl-orbit--one {
-  stroke-dasharray: 23 241;
-  animation: gl-orbit 1.45s linear infinite;
+  stroke-dasharray: 28 236;
+  animation: gl-orbit 1.5s linear infinite;
 }
 
 .gl-spinner .gl-orbit--two {
-  stroke-dasharray: 15 249;
+  stroke-dasharray: 18 246;
   stroke-opacity: 0.72;
-  animation: gl-orbit 1.45s linear -0.48s infinite;
+  animation: gl-orbit 1.5s linear -0.5s infinite;
 }
 
 .gl-spinner .gl-orbit--three {
-  stroke-dasharray: 8 256;
+  stroke-dasharray: 10 254;
   stroke-opacity: 0.46;
-  animation: gl-orbit 1.45s linear -0.96s infinite;
+  animation: gl-orbit 1.5s linear -1s infinite;
 }
 
-/*
-  Official GenLayer symbol:
-  stable and readable, with only a controlled breathing motion.
-  It intentionally does NOT rotate.
-*/
 .gl-spinner .gl-symbol {
   fill: currentColor;
   transform-origin: 50px 50px;
   will-change: transform, opacity;
-  animation: gl-core 1.45s ease-in-out infinite;
+  animation: gl-core 1.5s ease-in-out infinite;
 }
 
-/*
-  360-degree rotation finishes at the same exact visual position.
-  Dash-offset progresses continuously so the loop has no abrupt reset.
-*/
 @keyframes gl-orbit {
   0% {
     transform: rotate(-90deg);
@@ -112,8 +83,8 @@
 @keyframes gl-core {
   0%,
   100% {
-    opacity: 0.82;
-    transform: scale(0.94);
+    opacity: 0.86;
+    transform: scale(0.96);
   }
 
   50% {
@@ -122,11 +93,6 @@
   }
 }
 
-/*
-  Accessibility:
-  people requesting less motion still see a high-contrast,
-  static GenLayer loading marker.
-*/
 @media (prefers-reduced-motion: reduce) {
   .gl-spinner .gl-orbit,
   .gl-spinner .gl-symbol {
