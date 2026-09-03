@@ -8,42 +8,46 @@
   <title>GenLayer loading</title>
 
   <style>
+    svg {
+      color: #070707;
+    }
+
     .gl-track {
       fill: none;
       stroke: currentColor;
-      stroke-opacity: 0.14;
-      stroke-width: 4.5;
+      stroke-opacity: 0.16;
+      stroke-width: 4;
     }
 
     .gl-orbit {
       fill: none;
-      stroke: #110FFF;
+      stroke: #110fff;
       stroke-linecap: round;
       stroke-width: 4.5;
       transform-origin: 50px 50px;
     }
 
     .gl-orbit--one {
-      stroke-dasharray: 23 241;
-      animation: gl-orbit 1.45s linear infinite;
+      stroke-dasharray: 28 236;
+      animation: gl-orbit 1.5s linear infinite;
     }
 
     .gl-orbit--two {
-      stroke-dasharray: 15 249;
+      stroke-dasharray: 18 246;
       stroke-opacity: 0.72;
-      animation: gl-orbit 1.45s linear -0.48s infinite;
+      animation: gl-orbit 1.5s linear -0.5s infinite;
     }
 
     .gl-orbit--three {
-      stroke-dasharray: 8 256;
+      stroke-dasharray: 10 254;
       stroke-opacity: 0.46;
-      animation: gl-orbit 1.45s linear -0.96s infinite;
+      animation: gl-orbit 1.5s linear -1s infinite;
     }
 
     .gl-symbol {
       fill: currentColor;
       transform-origin: 50px 50px;
-      animation: gl-core 1.45s ease-in-out infinite;
+      animation: gl-core 1.5s ease-in-out infinite;
     }
 
     @keyframes gl-orbit {
@@ -65,8 +69,8 @@
     @keyframes gl-core {
       0%,
       100% {
-        opacity: 0.82;
-        transform: scale(0.94);
+        opacity: 0.86;
+        transform: scale(0.96);
       }
 
       50% {
@@ -83,16 +87,16 @@
     }
   </style>
 
-  <!-- Theme-adaptive background track -->
   <circle class="gl-track" cx="50" cy="50" r="42"/>
 
-  <!-- Three phased consensus signals -->
   <circle class="gl-orbit gl-orbit--one" cx="50" cy="50" r="42"/>
   <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
   <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-  <!-- Official GenLayer symbol geometry, kept stable at the centre -->
-  <g class="gl-symbol" transform="translate(25.12 26.5) scale(.508)">
+  <g
+    class="gl-symbol"
+    transform="translate(33.37 34.53) scale(.32)"
+  >
     <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
     <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
     <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
