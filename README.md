@@ -1,4 +1,4 @@
-# GenLayer Spinner — Fragment Finality
+# GenLayer Spinner - Fragment Finality
 
 A unique loading spinner for the GenLayer Portal.
 
