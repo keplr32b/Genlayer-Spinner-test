@@ -5,7 +5,7 @@
   role="img"
   aria-label="Loading"
 >
-  <title>GenLayer loading</title>
+  <title>GenLayer Consensus Signal Spinner</title>
 
   <style>
     svg {
@@ -15,68 +15,74 @@
     .gl-track {
       fill: none;
       stroke: currentColor;
-      stroke-opacity: 0.16;
-      stroke-width: 4;
+      stroke-opacity: 0.14;
+      stroke-width: 3.5;
     }
 
-    .gl-orbit {
+    .gl-signal {
       fill: none;
       stroke: #110fff;
       stroke-linecap: round;
-      stroke-width: 4;
-      transform-origin: 50px 50px;
+      stroke-width: 4.5;
+      transform-box: fill-box;
+      transform-origin: center;
     }
 
-    .gl-orbit--one {
-      stroke-dasharray: 30 234;
-      animation: gl-orbit 1.5s linear infinite;
+    .gl-signal--one {
+      stroke-dasharray: 32 232;
+      animation: gl-consensus-orbit 1.6s linear infinite;
     }
 
-    .gl-orbit--two {
-      stroke-dasharray: 19 245;
-      stroke-opacity: 0.7;
-      animation: gl-orbit 1.5s linear -0.5s infinite;
+    .gl-signal--two {
+      stroke-dasharray: 20 244;
+      stroke-opacity: 0.72;
+      animation: gl-consensus-orbit 1.6s linear -0.53s infinite;
     }
 
-    .gl-orbit--three {
-      stroke-dasharray: 10 254;
+    .gl-signal--three {
+      stroke-dasharray: 11 253;
       stroke-opacity: 0.45;
-      animation: gl-orbit 1.5s linear -1s infinite;
+      animation: gl-consensus-orbit 1.6s linear -1.06s infinite;
     }
 
     .gl-symbol {
       fill: currentColor;
       transform-origin: 50px 50px;
-      animation: gl-core 1.5s ease-in-out infinite;
+      animation: gl-core-settle 1.6s ease-in-out infinite;
     }
 
-    @keyframes gl-orbit {
-      from {
-        transform: rotate(-90deg);
-        stroke-dashoffset: 0;
+    @keyframes gl-consensus-orbit {
+      0% {
+        opacity: 0.55;
+        transform: rotate(-90deg) scale(0.98);
       }
 
-      to {
-        transform: rotate(270deg);
-        stroke-dashoffset: -84;
+      45% {
+        opacity: 1;
+        transform: rotate(72deg) scale(1);
+      }
+
+      100% {
+        opacity: 0.55;
+        transform: rotate(270deg) scale(0.98);
       }
     }
 
-    @keyframes gl-core {
+    @keyframes gl-core-settle {
       0%,
       100% {
-        opacity: 0.9;
-        transform: scale(0.92);
+        opacity: 0.86;
+        transform: scale(0.94);
       }
 
       50% {
         opacity: 1;
-        transform: scale(0.96);
+        transform: scale(1);
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .gl-orbit,
+      .gl-signal,
       .gl-symbol {
         animation: none;
       }
@@ -84,17 +90,16 @@
   </style>
 
   <circle class="gl-track" cx="50" cy="50" r="42"/>
-
-  <circle class="gl-orbit gl-orbit--one" cx="50" cy="50" r="42"/>
-  <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
-  <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
+  <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
+  <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
+  <circle class="gl-signal gl-signal--three" cx="50" cy="50" r="42"/>
 
   <svg
     class="gl-symbol"
-    x="38"
-    y="38"
-    width="24"
-    height="24"
+    x="35"
+    y="35"
+    width="30"
+    height="30"
     viewBox="0 0 97.76 91.93"
     aria-hidden="true"
   >
