@@ -1,99 +1,154 @@
-/* GenLayer Portal Consensus Orbit Spinner */
+/*
+  GenLayer Consensus Signal Spinner
+  ---------------------------------
+  Original SVG/CSS loader for GenLayer Portal.
+
+  Intent:
+  Three independent validator signals orbit a stable official GenLayer
+  symbol. Their slightly different phase offsets suggest distributed
+  consensus progressing around one shared network core.
+*/
 
 .gl-spinner {
   --gl-spinner-size: 40px;
   --gl-spinner-accent: #110fff;
   --gl-spinner-ink: #070707;
+  --gl-symbol-size: 14px;
 
+  position: relative;
   inline-size: var(--gl-spinner-size);
   block-size: var(--gl-spinner-size);
   display: inline-block;
   flex: 0 0 auto;
   color: var(--gl-spinner-ink);
+  isolation: isolate;
 }
 
 .gl-spinner--on-dark {
   --gl-spinner-ink: #ffffff;
 }
 
-.gl-spinner svg {
+/* Size presets keep the official mark readable at every Portal use case. */
+.gl-spinner--inline {
+  --gl-symbol-size: 10px;
+}
+
+.gl-spinner--action {
+  --gl-symbol-size: 14px;
+}
+
+.gl-spinner--page {
+  --gl-symbol-size: 22px;
+}
+
+.gl-spinner--hero {
+  --gl-symbol-size: 30px;
+}
+
+.gl-spinner > svg {
   display: block;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
+/* Quiet track gives each surface a stable circular boundary. */
 .gl-spinner .gl-track {
   fill: none;
   stroke: currentColor;
-  stroke-opacity: 0.16;
-  stroke-width: 4;
-}
-
-.gl-spinner .gl-orbit {
-  fill: none;
-  stroke: var(--gl-spinner-accent);
-  stroke-linecap: round;
-  stroke-width: 4;
-  transform-origin: 50px 50px;
-  will-change: transform, stroke-dashoffset;
-}
-
-.gl-spinner .gl-orbit--one {
-  stroke-dasharray: 30 234;
-  animation: gl-orbit 1.5s linear infinite;
-}
-
-.gl-spinner .gl-orbit--two {
-  stroke-dasharray: 19 245;
-  stroke-opacity: 0.7;
-  animation: gl-orbit 1.5s linear -0.5s infinite;
-}
-
-.gl-spinner .gl-orbit--three {
-  stroke-dasharray: 10 254;
-  stroke-opacity: 0.45;
-  animation: gl-orbit 1.5s linear -1s infinite;
+  stroke-opacity: 0.14;
+  stroke-width: 3.5;
 }
 
 /*
-  The nested symbol SVG has an explicit 24×24 viewport centred at 38,38.
-  Therefore its geometry remains contained inside the 100×100 orbit,
-  without fragile translate/scale calculations.
+  Three segmented paths are deliberately different in length and opacity.
+  They are offset by one third of a cycle, so they read as independent
+  signals instead of a single default dotted ring.
+*/
+.gl-spinner .gl-signal {
+  fill: none;
+  stroke: var(--gl-spinner-accent);
+  stroke-linecap: round;
+  stroke-width: 4.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.gl-spinner .gl-signal--one {
+  stroke-dasharray: 32 232;
+  animation: gl-consensus-orbit 1.6s linear infinite;
+}
+
+.gl-spinner .gl-signal--two {
+  stroke-dasharray: 20 244;
+  stroke-opacity: 0.72;
+  animation: gl-consensus-orbit 1.6s linear -0.53s infinite;
+}
+
+.gl-spinner .gl-signal--three {
+  stroke-dasharray: 11 253;
+  stroke-opacity: 0.45;
+  animation: gl-consensus-orbit 1.6s linear -1.06s infinite;
+}
+
+/*
+  The official mark is a separate nested SVG. Its explicit size is
+  controlled by --gl-symbol-size, which eliminates transform-centering
+  errors and keeps it completely inside the orbital motion.
 */
 .gl-spinner .gl-symbol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--gl-symbol-size);
+  height: var(--gl-symbol-size);
   fill: currentColor;
-  transform-origin: 50px 50px;
-  animation: gl-core 1.5s ease-in-out infinite;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.96);
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: gl-core-settle 1.6s ease-in-out infinite;
 }
 
-@keyframes gl-orbit {
-  from {
-    transform: rotate(-90deg);
-    stroke-dashoffset: 0;
+/*
+  The orbit returns to an identical geometric state at every loop boundary.
+  A tiny scale response gives the movement a signal-resolution feeling
+  without introducing distracting motion.
+*/
+@keyframes gl-consensus-orbit {
+  0% {
+    opacity: 0.55;
+    transform: rotate(-90deg) scale(0.98);
   }
 
-  to {
-    transform: rotate(270deg);
-    stroke-dashoffset: -84;
+  45% {
+    opacity: 1;
+    transform: rotate(72deg) scale(1);
+  }
+
+  100% {
+    opacity: 0.55;
+    transform: rotate(270deg) scale(0.98);
   }
 }
 
-@keyframes gl-core {
+@keyframes gl-core-settle {
   0%,
   100% {
-    opacity: 0.9;
-    transform: scale(0.92);
+    opacity: 0.86;
+    transform: translate(-50%, -50%) scale(0.94);
   }
 
   50% {
     opacity: 1;
-    transform: scale(0.96);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
+/* A stable branded marker remains available for motion-sensitive users. */
 @media (prefers-reduced-motion: reduce) {
-  .gl-spinner .gl-orbit,
+  .gl-spinner .gl-signal,
   .gl-spinner .gl-symbol {
     animation: none;
   }
