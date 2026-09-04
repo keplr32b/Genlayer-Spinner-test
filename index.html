@@ -14,7 +14,6 @@
       --void: #070707;
       --ceramic: #f5f5f5;
       --cobalt: #110fff;
-      --muted-dark: #a7a7a7;
       --line-dark: rgba(255, 255, 255, 0.13);
     }
 
@@ -32,7 +31,14 @@
       margin: 0;
       background: var(--void);
       color: #ffffff;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
     }
 
     .page {
@@ -391,12 +397,14 @@
         <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
         <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
       </svg>
+
       <span class="brand-name">GenLayer</span>
       <span class="eyebrow">Portal loader · community submission</span>
     </header>
 
     <section class="hero">
       <h1>Consensus,<br>in motion.</h1>
+
       <p class="intro">
         A compact loading system for GenLayer Portal. Three phased validator
         signals circulate a stable official GenLayer symbol—an original motion
@@ -406,17 +414,26 @@
       <div class="principles">
         <article class="principle">
           <b>Identity first</b>
-          <p>The official symbol remains stable and clear at the centre, never treated as decoration on a default loader.</p>
+          <p>
+            The official symbol remains stable and clear at the centre,
+            never treated as decoration on a default loader.
+          </p>
         </article>
 
         <article class="principle">
           <b>Consensus signal</b>
-          <p>Three staggered cobalt segments move independently around one network core, suggesting validator coordination.</p>
+          <p>
+            Three staggered cobalt segments move independently around one
+            network core, suggesting validator coordination.
+          </p>
         </article>
 
         <article class="principle">
           <b>Portal ready</b>
-          <p>One lightweight SVG/CSS component works on light and dark interfaces, from inline feedback to a page loader.</p>
+          <p>
+            One lightweight SVG/CSS component works on light and dark
+            interfaces, from inline feedback to a page loader.
+          </p>
         </article>
       </div>
     </section>
@@ -429,8 +446,13 @@
         </div>
 
         <div class="hero-loader">
-          <div class="gl-spinner gl-spinner--on-dark gl-spinner--hero" style="--gl-spinner-size: 96px" role="status" aria-label="Loading Portal">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
+          <div
+            class="gl-spinner gl-spinner--on-dark gl-spinner--hero"
+            style="--gl-spinner-size: 104px"
+            role="status"
+            aria-label="Loading Portal"
+          >
+            <svg class="gl-orbit-canvas" viewBox="0 0 100 100" aria-hidden="true">
               <circle class="gl-track" cx="50" cy="50" r="42"/>
               <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
               <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
@@ -452,7 +474,7 @@
             <h2>Loading Portal</h2>
             <p>Fetching network state and workspace data.</p>
           </div>
-          <span class="tag">96px</span>
+          <span class="tag">104px</span>
         </div>
       </article>
 
@@ -463,8 +485,13 @@
         </div>
 
         <div class="hero-loader">
-          <div class="gl-spinner gl-spinner--hero" style="--gl-spinner-size: 96px" role="status" aria-label="Loading Portal">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
+          <div
+            class="gl-spinner gl-spinner--hero"
+            style="--gl-spinner-size: 104px"
+            role="status"
+            aria-label="Loading Portal"
+          >
+            <svg class="gl-orbit-canvas" viewBox="0 0 100 100" aria-hidden="true">
               <circle class="gl-track" cx="50" cy="50" r="42"/>
               <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
               <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
@@ -486,7 +513,7 @@
             <h2>Loading Portal</h2>
             <p>Fetching network state and workspace data.</p>
           </div>
-          <span class="tag">96px</span>
+          <span class="tag">104px</span>
         </div>
       </article>
     </section>
@@ -504,8 +531,13 @@
             <p>Small status transition in a row or table.</p>
           </div>
 
-          <div class="gl-spinner gl-spinner--on-dark gl-spinner--inline" style="--gl-spinner-size: 24px" role="status" aria-label="Updating">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
+          <div
+            class="gl-spinner gl-spinner--on-dark gl-spinner--inline"
+            style="--gl-spinner-size: 24px"
+            role="status"
+            aria-label="Updating"
+          >
+            <svg class="gl-orbit-canvas" viewBox="0 0 100 100" aria-hidden="true">
               <circle class="gl-track" cx="50" cy="50" r="42"/>
               <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
               <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
@@ -528,8 +560,13 @@
             <p>Button or transaction confirmation state.</p>
           </div>
 
-          <div class="gl-spinner gl-spinner--on-dark gl-spinner--action" style="--gl-spinner-size: 40px" role="status" aria-label="Processing transaction">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
+          <div
+            class="gl-spinner gl-spinner--on-dark gl-spinner--action"
+            style="--gl-spinner-size: 40px"
+            role="status"
+            aria-label="Processing transaction"
+          >
+            <svg class="gl-orbit-canvas" viewBox="0 0 100 100" aria-hidden="true">
               <circle class="gl-track" cx="50" cy="50" r="42"/>
               <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
               <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
@@ -552,8 +589,13 @@
             <p>Full-screen or section-level data retrieval.</p>
           </div>
 
-          <div class="gl-spinner gl-spinner--on-dark gl-spinner--page" style="--gl-spinner-size: 72px" role="status" aria-label="Loading page">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
+          <div
+            class="gl-spinner gl-spinner--on-dark gl-spinner--page"
+            style="--gl-spinner-size: 72px"
+            role="status"
+            aria-label="Loading page"
+          >
+            <svg class="gl-orbit-canvas" viewBox="0 0 100 100" aria-hidden="true">
               <circle class="gl-track" cx="50" cy="50" r="42"/>
               <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
               <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
@@ -574,6 +616,7 @@
 
     <section class="integration">
       <h2>Reusable without dependencies.</h2>
+
       <p>
         A pure SVG and CSS component with no JavaScript or external packages.
         Set only the size and theme modifier for use across Portal loading states.
