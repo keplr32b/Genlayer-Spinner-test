@@ -4,11 +4,251 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GenLayer Portal — Fragment Finality</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #070707;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .gl-spinner {
+      width: 68px;
+      height: 64px;
+      color: #F5F5F5;
+    }
+    .gl-spinner svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .gl-part {
+      fill: currentColor;
+      transform-origin: center;
+      transform-box: fill-box;
+    }
+    .gl-left {
+      animation: assemble-left 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+    .gl-right {
+      animation: assemble-right 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+    .gl-center {
+      animation: assemble-center 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+    @keyframes assemble-left {
+      0%   { transform: translate(-16px, 7px) rotate(-16deg); opacity: 0.2; }
+      32%  { transform: translate(-16px, 7px) rotate(-16deg); opacity: 0.45; }
+      52%  { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      72%  { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(-16px, 7px) rotate(-16deg); opacity: 0.2; }
+    }
+    @keyframes assemble-right {
+      0%   { transform: translate(16px, 7px) rotate(16deg); opacity: 0.2; }
+      32%  { transform: translate(16px, 7px) rotate(16deg); opacity: 0.45; }
+      52%  { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      72%  { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(16px, 7px) rotate(16deg); opacity: 0.2; }
+    }
+    @keyframes assemble-center {
+      0%   { transform: translate(0, -12px) scale(0.65); opacity: 0.15; }
+      38%  { transform: translate(0, -12px) scale(0.65); opacity: 0.4; }
+      55%  { transform: translate(0, 0) scale(1); opacity: 1; }
+      72%  { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(0, -12px) scale(0.65); opacity: 0.15; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gl-part {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: #0a0a0c;
+      color: #f5f5f5;
+      min-height: 100vh;
+    }
+    .app {
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity 0.55s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .app.visible { opacity: 1; }
+
+    .topnav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .brand svg { width: 22px; height: 22px; }
+    .nav-links { display: flex; gap: 8px; }
+    .nav-links a {
+      color: #a1a1aa;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 14px;
+      border-radius: 8px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #f5f5f5;
+      background: rgba(255,255,255,0.06);
+    }
+    .btn {
+      background: #110FFF;
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .hero-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 80px;
+      position: relative;
+    }
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(17,15,255,0.18) 0%, transparent 70%);
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #a1a1aa;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+    .hero-section h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      max-width: 700px;
+    }
+    .hero-section h1 span {
+      background: linear-gradient(90deg, #110FFF, #7c5cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-section p {
+      font-size: 1.15rem;
+      color: #a1a1aa;
+      max-width: 520px;
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-outline {
+      background: transparent;
+      color: #f5f5f5;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    @media (max-width: 700px) {
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+    .stat {
+      background: #0a0a0c;
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .stat .num {
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .stat .lbl {
+      font-size: 13px;
+      color: #a1a1aa;
+    }
+
+    .replay-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #111113;
+      color: #f5f5f5;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 11px 18px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+  </style>
 </head>
 <body>
 
-  <!-- LOADER -->
   <div id="loader">
     <div class="gl-spinner" role="status" aria-label="Loading">
       <svg viewBox="0 0 97.76 91.93" xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +259,6 @@
     </div>
   </div>
 
-  <!-- APP -->
   <div class="app" id="app">
     <nav class="topnav">
       <div class="brand">
