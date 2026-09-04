@@ -1,635 +1,284 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#070707">
-  <title>GenLayer Consensus Signal Spinner</title>
-
-  <link rel="stylesheet" href="spinner.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GenLayer Spinner — Mark Resolve</title>
+  <meta name="description" content="Production-ready GenLayer Portal loading spinner. Pure SVG + CSS. Official mark identity." />
+  <link rel="stylesheet" href="spinner.css" />
   <style>
     :root {
-      color-scheme: dark;
-      --void: #070707;
-      --ceramic: #f5f5f5;
-      --cobalt: #110fff;
-      --line-dark: rgba(255, 255, 255, 0.13);
+      --bg: #070707;
+      --surface: #111113;
+      --text: #f5f5f5;
+      --muted: #a1a1aa;
+      --border: rgba(255,255,255,0.08);
+      --accent: #110FFF;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      overflow-x: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
     }
-
-    body {
-      min-width: 320px;
-      margin: 0;
-      background: var(--void);
-      color: #ffffff;
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-    }
-
     .page {
-      width: min(1080px, calc(100% - 40px));
+      max-width: 960px;
       margin: 0 auto;
-      padding: 32px 0 64px;
+      padding: 48px 24px 80px;
     }
-
-    .masthead {
-      display: flex;
+    header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    header .badge {
+      display: inline-flex;
       align-items: center;
-      gap: 9px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--line-dark);
-    }
-
-    .brand-mark {
-      width: 20px;
-      height: 20px;
-      flex: 0 0 auto;
-      fill: #ffffff;
-    }
-
-    .brand-name {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-    }
-
-    .eyebrow {
-      margin-left: auto;
-      color: #bcbcbc;
-      font-size: 10px;
-      font-weight: 750;
-      letter-spacing: 0.12em;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-    }
-
-    .hero {
-      max-width: 760px;
-      padding: 56px 0 32px;
-    }
-
-    h1 {
-      max-width: 650px;
-      margin: 0 0 16px;
-      font-size: clamp(46px, 7.4vw, 82px);
-      line-height: 0.9;
-      letter-spacing: -0.08em;
-    }
-
-    .intro {
-      max-width: 620px;
-      margin: 0;
-      color: #c5c5c5;
-      font-size: 17px;
-      line-height: 1.55;
-    }
-
-    .principles {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 34px;
-    }
-
-    .principle {
-      min-height: 146px;
-      padding: 20px;
-      border: 1px solid var(--line-dark);
-      border-radius: 18px;
-      background: #0d0d0d;
-    }
-
-    .principle b {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 11px;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-    }
-
-    .principle p {
-      margin: 0;
-      color: #a9a9a9;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    .surface {
-      min-height: 400px;
-      padding: 24px;
-      border: 1px solid transparent;
-      border-radius: 22px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .surface--dark {
-      color: #ffffff;
-      background: #070707;
-      border-color: #292929;
-    }
-
-    .surface--light {
-      color: #070707;
-      background: #f5f5f5;
-      border-color: #dedede;
-    }
-
-    .surface-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      color: inherit;
-      font-size: 10px;
-      font-weight: 750;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0.65;
-    }
-
-    .hero-loader {
-      flex: 1;
-      min-height: 205px;
-      display: grid;
-      place-items: center;
-    }
-
-    .surface-copy {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 15px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(127, 127, 127, 0.25);
-    }
-
-    .surface-copy h2 {
-      margin: 0 0 4px;
-      font-size: 19px;
-      letter-spacing: -0.04em;
-    }
-
-    .surface-copy p {
-      margin: 0;
-      font-size: 13px;
-      opacity: 0.64;
-    }
-
-    .tag {
-      padding: 7px 9px;
-      border: 1px solid rgba(127, 127, 127, 0.4);
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 750;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .states {
-      margin-top: 16px;
-      padding: 24px;
-      border: 1px solid var(--line-dark);
-      border-radius: 22px;
-      background: #0d0d0d;
-    }
-
-    .states-heading {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 18px;
+      color: var(--muted);
       margin-bottom: 20px;
     }
-
-    .states-heading h2 {
-      margin: 0;
-      font-size: 24px;
-      letter-spacing: -0.055em;
-    }
-
-    .states-heading p {
-      margin: 0;
-      color: #a7a7a7;
-      font-size: 13px;
-    }
-
-    .state-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .state {
-      min-height: 118px;
-      padding: 17px;
-      border: 1px solid var(--line-dark);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .state h3 {
-      margin: 0 0 5px;
-      font-size: 14px;
+    header h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 600;
       letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
     }
-
-    .state p {
-      max-width: 180px;
-      margin: 0;
-      color: #9c9c9c;
-      font-size: 12px;
-      line-height: 1.4;
+    header p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
     }
-
-    .integration {
-      margin-top: 16px;
-      padding: 24px;
-      border-radius: 22px;
-      background: var(--cobalt);
-      color: #ffffff;
-    }
-
-    .integration h2 {
-      margin: 0 0 8px;
-      font-size: 24px;
-      letter-spacing: -0.055em;
-    }
-
-    .integration p {
-      max-width: 620px;
-      margin: 0 0 18px;
-      color: #e8e5ff;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    pre {
-      max-width: 100%;
-      margin: 0;
-      padding: 17px;
-      overflow-x: auto;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 14px;
-      background: rgba(0, 0, 0, 0.16);
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 11px;
-      line-height: 1.55;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
+    .hero-loader {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 48px;
+      position: relative;
       overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
     }
-
-    @media (max-width: 760px) {
-      .page {
-        width: min(100% - 24px, 1080px);
-        padding: 24px 0 40px;
-      }
-
-      .masthead {
-        padding-bottom: 22px;
-      }
-
-      .eyebrow {
-        display: none;
-      }
-
-      .hero {
-        padding: 42px 0 28px;
-      }
-
-      h1 {
-        font-size: clamp(42px, 15vw, 72px);
-      }
-
-      .intro {
-        font-size: 15px;
-      }
-
-      .principles,
-      .preview-grid,
-      .state-list {
-        grid-template-columns: 1fr;
-      }
-
-      .surface {
-        min-height: 350px;
-        padding: 20px;
-      }
-
-      .hero-loader {
-        min-height: 180px;
-      }
-
-      .states,
-      .integration {
-        padding: 20px;
-      }
-
-      .states-heading {
-        display: block;
-      }
-
-      .states-heading h2 {
-        margin-bottom: 8px;
-        font-size: 22px;
-      }
+    .hero-loader .label {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 500;
     }
-
-    @media (max-width: 380px) {
-      .page {
-        width: calc(100% - 20px);
-      }
-
-      .surface-copy {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .state {
-        min-height: 104px;
-        padding: 15px;
-      }
+    .hero-loader .size-tag {
+      position: absolute;
+      bottom: 16px;
+      right: 20px;
+      font-size: 11px;
+      color: var(--muted);
+      opacity: 0.6;
+    }
+    .states {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .state-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .state-card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .state-card .desc {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      opacity: 0.8;
+    }
+    .theme-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 640px) {
+      .theme-row { grid-template-columns: 1fr; }
+    }
+    .theme-box {
+      border-radius: 16px;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid var(--border);
+    }
+    .theme-box.dark {
+      background: #070707;
+    }
+    .theme-box.light {
+      background: #F5F5F5;
+      color: #070707;
+    }
+    .theme-box .theme-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+    .code-section {
+      background: #110FFF;
+      border-radius: 16px;
+      padding: 32px 28px;
+      color: white;
+    }
+    .code-section h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .code-section p {
+      opacity: 0.85;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+    .code-section pre {
+      background: rgba(0,0,0,0.25);
+      border-radius: 12px;
+      padding: 18px 20px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    footer {
+      text-align: center;
+      margin-top: 64px;
+      font-size: 13px;
+      color: var(--muted);
     }
   </style>
 </head>
-
 <body>
-  <main class="page">
-    <header class="masthead" aria-label="GenLayer">
-      <svg class="brand-mark" viewBox="0 0 97.76 91.93" aria-hidden="true">
-        <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
-        <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
-        <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-      </svg>
-
-      <span class="brand-name">GenLayer</span>
-      <span class="eyebrow">Portal loader · community submission</span>
+  <div class="page">
+    <header>
+      <div class="badge">
+        <svg width="14" height="14" viewBox="0 0 97.76 91.93" fill="currentColor">
+          <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+          <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+          <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
+        </svg>
+        GenLayer Portal · Community Submission
+      </div>
+      <h1>Mark Resolve.</h1>
+      <p>Official GenLayer mark as the spinner. Three geometric planes draw, resolve, and loop — pure identity, zero decoration.</p>
     </header>
 
-    <section class="hero">
-      <h1>Consensus,<br>in motion.</h1>
-
-      <p class="intro">
-        A compact loading system for GenLayer Portal. Three phased validator
-        signals circulate a stable official GenLayer symbol—an original motion
-        language for state resolution across the network.
-      </p>
-
-      <div class="principles">
-        <article class="principle">
-          <b>Identity first</b>
-          <p>
-            The official symbol remains stable and clear at the centre,
-            never treated as decoration on a default loader.
-          </p>
-        </article>
-
-        <article class="principle">
-          <b>Consensus signal</b>
-          <p>
-            Three staggered cobalt segments move independently around one
-            network core, suggesting validator coordination.
-          </p>
-        </article>
-
-        <article class="principle">
-          <b>Portal ready</b>
-          <p>
-            One lightweight SVG/CSS component works on light and dark
-            interfaces, from inline feedback to a page loader.
-          </p>
-        </article>
+    <div class="hero-loader">
+      <div class="gl-spinner gl-spinner--page gl-spinner--on-dark" role="status" aria-label="Loading">
+        <svg class="gl-mark" viewBox="0 0 97.76 91.93" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="gl-part gl-left" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+          <polygon class="gl-part gl-right" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+          <polygon class="gl-part gl-center" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
+        </svg>
       </div>
-    </section>
+      <p class="label">Loading Portal…</p>
+      <span class="size-tag">96px</span>
+    </div>
 
-    <section class="preview-grid" aria-label="Theme previews">
-      <article class="surface surface--dark">
-        <div class="surface-header">
-          <span>Dark interface</span>
-          <span>Carbon Void</span>
+    <div class="theme-row">
+      <div class="theme-box dark">
+        <div class="gl-spinner gl-spinner--hero gl-spinner--on-dark" role="status" aria-label="Loading">
+          <svg class="gl-mark" viewBox="0 0 97.76 91.93">
+            <polygon class="gl-part gl-left" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+            <polygon class="gl-part gl-right" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+            <polygon class="gl-part gl-center" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
+          </svg>
         </div>
-
-        <div class="hero-loader">
-          <div
-            class="gl-spinner gl-spinner--on-dark gl-spinner--hero"
-            style="--gl-spinner-size: 104px"
-            role="status"
-            aria-label="Loading Portal"
-          >
-            <svg class="gl-orbit-canvas" viewBox="0 0 100 100" aria-hidden="true">
-              <circle class="gl-track" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--three" cx="50" cy="50" r="42"/>
-            </svg>
-
-            <svg class="gl-symbol" viewBox="0 0 97.76 91.93" aria-hidden="true">
-              <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
-              <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
-              <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-            </svg>
-
-            <span class="sr-only">Loading Portal</span>
-          </div>
-        </div>
-
-        <div class="surface-copy">
-          <div>
-            <h2>Loading Portal</h2>
-            <p>Fetching network state and workspace data.</p>
-          </div>
-          <span class="tag">104px</span>
-        </div>
-      </article>
-
-      <article class="surface surface--light">
-        <div class="surface-header">
-          <span>Light interface</span>
-          <span>Ceramic</span>
-        </div>
-
-        <div class="hero-loader">
-          <div
-            class="gl-spinner gl-spinner--hero"
-            style="--gl-spinner-size: 104px"
-            role="status"
-            aria-label="Loading Portal"
-          >
-            <svg class="gl-orbit-canvas" viewBox="0 0 100 100" aria-hidden="true">
-              <circle class="gl-track" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--three" cx="50" cy="50" r="42"/>
-            </svg>
-
-            <svg class="gl-symbol" viewBox="0 0 97.76 91.93" aria-hidden="true">
-              <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
-              <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
-              <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-            </svg>
-
-            <span class="sr-only">Loading Portal</span>
-          </div>
-        </div>
-
-        <div class="surface-copy">
-          <div>
-            <h2>Loading Portal</h2>
-            <p>Fetching network state and workspace data.</p>
-          </div>
-          <span class="tag">104px</span>
-        </div>
-      </article>
-    </section>
-
-    <section class="states" aria-labelledby="states-title">
-      <div class="states-heading">
-        <h2 id="states-title">One component. Every loading state.</h2>
-        <p>Clear at compact and expanded Portal sizes.</p>
+        <span class="theme-label">Carbon Void · Dark</span>
       </div>
-
-      <div class="state-list">
-        <article class="state">
-          <div>
-            <h3>Inline update</h3>
-            <p>Small status transition in a row or table.</p>
-          </div>
-
-          <div
-            class="gl-spinner gl-spinner--on-dark gl-spinner--inline"
-            style="--gl-spinner-size: 24px"
-            role="status"
-            aria-label="Updating"
-          >
-            <svg class="gl-orbit-canvas" viewBox="0 0 100 100" aria-hidden="true">
-              <circle class="gl-track" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--three" cx="50" cy="50" r="42"/>
-            </svg>
-
-            <svg class="gl-symbol" viewBox="0 0 97.76 91.93" aria-hidden="true">
-              <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
-              <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
-              <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-            </svg>
-
-            <span class="sr-only">Updating</span>
-          </div>
-        </article>
-
-        <article class="state">
-          <div>
-            <h3>Action pending</h3>
-            <p>Button or transaction confirmation state.</p>
-          </div>
-
-          <div
-            class="gl-spinner gl-spinner--on-dark gl-spinner--action"
-            style="--gl-spinner-size: 40px"
-            role="status"
-            aria-label="Processing transaction"
-          >
-            <svg class="gl-orbit-canvas" viewBox="0 0 100 100" aria-hidden="true">
-              <circle class="gl-track" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--three" cx="50" cy="50" r="42"/>
-            </svg>
-
-            <svg class="gl-symbol" viewBox="0 0 97.76 91.93" aria-hidden="true">
-              <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
-              <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
-              <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-            </svg>
-
-            <span class="sr-only">Processing transaction</span>
-          </div>
-        </article>
-
-        <article class="state">
-          <div>
-            <h3>Page loading</h3>
-            <p>Full-screen or section-level data retrieval.</p>
-          </div>
-
-          <div
-            class="gl-spinner gl-spinner--on-dark gl-spinner--page"
-            style="--gl-spinner-size: 72px"
-            role="status"
-            aria-label="Loading page"
-          >
-            <svg class="gl-orbit-canvas" viewBox="0 0 100 100" aria-hidden="true">
-              <circle class="gl-track" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--one" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--two" cx="50" cy="50" r="42"/>
-              <circle class="gl-signal gl-signal--three" cx="50" cy="50" r="42"/>
-            </svg>
-
-            <svg class="gl-symbol" viewBox="0 0 97.76 91.93" aria-hidden="true">
-              <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
-              <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
-              <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-            </svg>
-
-            <span class="sr-only">Loading page</span>
-          </div>
-        </article>
+      <div class="theme-box light">
+        <div class="gl-spinner gl-spinner--hero gl-spinner--on-light" role="status" aria-label="Loading">
+          <svg class="gl-mark" viewBox="0 0 97.76 91.93">
+            <polygon class="gl-part gl-left" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+            <polygon class="gl-part gl-right" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+            <polygon class="gl-part gl-center" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
+          </svg>
+        </div>
+        <span class="theme-label">Ceramic · Light</span>
       </div>
-    </section>
+    </div>
 
-    <section class="integration">
-      <h2>Reusable without dependencies.</h2>
+    <div class="states">
+      <div class="state-card">
+        <div class="gl-spinner gl-spinner--inline gl-spinner--on-dark" role="status" aria-label="Loading">
+          <svg class="gl-mark" viewBox="0 0 97.76 91.93">
+            <polygon class="gl-part gl-left" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+            <polygon class="gl-part gl-right" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+            <polygon class="gl-part gl-center" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
+          </svg>
+        </div>
+        <h3>Inline</h3>
+        <p class="desc">24px · table rows, status chips</p>
+      </div>
+      <div class="state-card">
+        <div class="gl-spinner gl-spinner--action gl-spinner--on-dark" role="status" aria-label="Loading">
+          <svg class="gl-mark" viewBox="0 0 97.76 91.93">
+            <polygon class="gl-part gl-left" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+            <polygon class="gl-part gl-right" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+            <polygon class="gl-part gl-center" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
+          </svg>
+        </div>
+        <h3>Action</h3>
+        <p class="desc">40px · buttons, confirmations</p>
+      </div>
+      <div class="state-card">
+        <div class="gl-spinner gl-spinner--page gl-spinner--on-dark" role="status" aria-label="Loading">
+          <svg class="gl-mark" viewBox="0 0 97.76 91.93">
+            <polygon class="gl-part gl-left" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+            <polygon class="gl-part gl-right" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+            <polygon class="gl-part gl-center" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
+          </svg>
+        </div>
+        <h3>Page</h3>
+        <p class="desc">64–96px · full section loaders</p>
+      </div>
+    </div>
 
-      <p>
-        A pure SVG and CSS component with no JavaScript or external packages.
-        Set only the size and theme modifier for use across Portal loading states.
-      </p>
+    <div class="code-section">
+      <h2>One component. Zero dependencies.</h2>
+      <p>Pure SVG + CSS. Drop in any Portal loading state. Set size + theme modifier only.</p>
+      <pre>&lt;div class="gl-spinner gl-spinner--on-dark gl-spinner--page"
+     role="status" aria-label="Loading"&gt;
+  &lt;svg class="gl-mark" viewBox="0 0 97.76 91.93"&gt;
+    &lt;polygon class="gl-part gl-left" points="..."/&gt;
+    &lt;polygon class="gl-part gl-right" points="..."/&gt;
+    &lt;polygon class="gl-part gl-center" points="..."/&gt;
+  &lt;/svg&gt;
+&lt;/div&gt;</pre>
+    </div>
 
-      <pre><code>&lt;div class="gl-spinner gl-spinner--on-dark gl-spinner--action"
-  style="--gl-spinner-size: 40px"
-  role="status"
-  aria-label="Loading"&gt;
-  &lt;!-- component SVG markup --&gt;
-  &lt;span class="sr-only"&gt;Loading&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-    </section>
-  </main>
+    <footer>
+      Built for the GenLayer Portal spinner mission · Official mark geometry · Pure CSS
+    </footer>
+  </div>
 </body>
 </html>
