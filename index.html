@@ -167,10 +167,6 @@
       place-items: center;
     }
 
-    .hero-loader .gl-spinner {
-      --gl-spinner-size: 96px;
-    }
-
     .surface-copy {
       display: flex;
       align-items: flex-end;
@@ -287,6 +283,7 @@
       max-width: 100%;
       margin: 0;
       padding: 18px;
+      overflow-x: auto;
       border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 14px;
       background: rgba(0, 0, 0, 0.16);
@@ -294,7 +291,6 @@
       font-size: 12px;
       line-height: 1.6;
       white-space: pre-wrap;
-      overflow-x: auto;
       overflow-wrap: anywhere;
     }
 
@@ -354,10 +350,6 @@
 
       .hero-loader {
         min-height: 190px;
-      }
-
-      .hero-loader .gl-spinner {
-        --gl-spinner-size: 82px;
       }
 
       .states {
@@ -422,7 +414,7 @@
 
       <p class="intro">
         A compact loading system for GenLayer Portal. Three phased signals continuously
-        circulate a stable, official GenLayer symbol—an original interpretation of
+        circulate a stable official GenLayer symbol—an original interpretation of
         validators resolving toward shared state.
       </p>
 
@@ -461,23 +453,18 @@
         </div>
 
         <div class="hero-loader">
-          <div
-            class="gl-spinner gl-spinner--on-dark"
-            style="--gl-spinner-size: 96px"
-            role="status"
-            aria-label="Loading portal data"
-          >
+          <div class="gl-spinner gl-spinner--on-dark" style="--gl-spinner-size: 96px" role="status" aria-label="Loading portal data">
             <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
               <circle class="gl-track" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--one" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-              <g class="gl-symbol" transform="translate(38.04 39.34) scale(.245)">
+              <svg class="gl-symbol" x="38" y="38" width="24" height="24" viewBox="0 0 97.76 91.93" aria-hidden="true">
                 <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
                 <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
                 <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-              </g>
+              </svg>
             </svg>
 
             <span class="sr-only">Loading portal data</span>
@@ -500,23 +487,18 @@
         </div>
 
         <div class="hero-loader">
-          <div
-            class="gl-spinner"
-            style="--gl-spinner-size: 96px"
-            role="status"
-            aria-label="Loading portal data"
-          >
+          <div class="gl-spinner" style="--gl-spinner-size: 96px" role="status" aria-label="Loading portal data">
             <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
               <circle class="gl-track" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--one" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-              <g class="gl-symbol" transform="translate(38.04 39.34) scale(.245)">
+              <svg class="gl-symbol" x="38" y="38" width="24" height="24" viewBox="0 0 97.76 91.93" aria-hidden="true">
                 <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
                 <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
                 <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-              </g>
+              </svg>
             </svg>
 
             <span class="sr-only">Loading portal data</span>
@@ -546,23 +528,18 @@
             <p>Small status transition in a row or table.</p>
           </div>
 
-          <div
-            class="gl-spinner gl-spinner--on-dark"
-            style="--gl-spinner-size: 24px"
-            role="status"
-            aria-label="Updating"
-          >
+          <div class="gl-spinner gl-spinner--on-dark" style="--gl-spinner-size: 24px" role="status" aria-label="Updating">
             <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
               <circle class="gl-track" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--one" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-              <g class="gl-symbol" transform="translate(38.04 39.34) scale(.245)">
+              <svg class="gl-symbol" x="38" y="38" width="24" height="24" viewBox="0 0 97.76 91.93" aria-hidden="true">
                 <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
                 <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
                 <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-              </g>
+              </svg>
             </svg>
 
             <span class="sr-only">Updating</span>
@@ -575,23 +552,18 @@
             <p>Button or transaction confirmation state.</p>
           </div>
 
-          <div
-            class="gl-spinner gl-spinner--on-dark"
-            style="--gl-spinner-size: 40px"
-            role="status"
-            aria-label="Processing transaction"
-          >
+          <div class="gl-spinner gl-spinner--on-dark" style="--gl-spinner-size: 40px" role="status" aria-label="Processing transaction">
             <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
               <circle class="gl-track" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--one" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-              <g class="gl-symbol" transform="translate(38.04 39.34) scale(.245)">
+              <svg class="gl-symbol" x="38" y="38" width="24" height="24" viewBox="0 0 97.76 91.93" aria-hidden="true">
                 <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
                 <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
                 <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-              </g>
+              </svg>
             </svg>
 
             <span class="sr-only">Processing transaction</span>
@@ -604,23 +576,18 @@
             <p>Full-screen or section-level data retrieval.</p>
           </div>
 
-          <div
-            class="gl-spinner gl-spinner--on-dark"
-            style="--gl-spinner-size: 72px"
-            role="status"
-            aria-label="Loading page"
-          >
+          <div class="gl-spinner gl-spinner--on-dark" style="--gl-spinner-size: 72px" role="status" aria-label="Loading page">
             <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
               <circle class="gl-track" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--one" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
               <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-              <g class="gl-symbol" transform="translate(38.04 39.34) scale(.245)">
+              <svg class="gl-symbol" x="38" y="38" width="24" height="24" viewBox="0 0 97.76 91.93" aria-hidden="true">
                 <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
                 <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
                 <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-              </g>
+              </svg>
             </svg>
 
             <span class="sr-only">Loading page</span>
