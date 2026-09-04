@@ -23,24 +23,24 @@
       fill: none;
       stroke: #110fff;
       stroke-linecap: round;
-      stroke-width: 4.5;
+      stroke-width: 4;
       transform-origin: 50px 50px;
     }
 
     .gl-orbit--one {
-      stroke-dasharray: 28 236;
+      stroke-dasharray: 30 234;
       animation: gl-orbit 1.5s linear infinite;
     }
 
     .gl-orbit--two {
-      stroke-dasharray: 18 246;
-      stroke-opacity: 0.72;
+      stroke-dasharray: 19 245;
+      stroke-opacity: 0.7;
       animation: gl-orbit 1.5s linear -0.5s infinite;
     }
 
     .gl-orbit--three {
       stroke-dasharray: 10 254;
-      stroke-opacity: 0.46;
+      stroke-opacity: 0.45;
       animation: gl-orbit 1.5s linear -1s infinite;
     }
 
@@ -51,16 +51,12 @@
     }
 
     @keyframes gl-orbit {
-      0% {
+      from {
         transform: rotate(-90deg);
         stroke-dashoffset: 0;
       }
 
-      50% {
-        stroke-dashoffset: -42;
-      }
-
-      100% {
+      to {
         transform: rotate(270deg);
         stroke-dashoffset: -84;
       }
@@ -69,13 +65,13 @@
     @keyframes gl-core {
       0%,
       100% {
-        opacity: 0.86;
-        transform: scale(0.96);
+        opacity: 0.9;
+        transform: scale(0.92);
       }
 
       50% {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(0.96);
       }
     }
 
@@ -93,12 +89,17 @@
   <circle class="gl-orbit gl-orbit--two" cx="50" cy="50" r="42"/>
   <circle class="gl-orbit gl-orbit--three" cx="50" cy="50" r="42"/>
 
-  <g
+  <svg
     class="gl-symbol"
-    transform="translate(33.37 34.53) scale(.32)"
+    x="38"
+    y="38"
+    width="24"
+    height="24"
+    viewBox="0 0 97.76 91.93"
+    aria-hidden="true"
   >
     <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
     <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
     <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
-  </g>
+  </svg>
 </svg>
