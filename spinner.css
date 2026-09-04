@@ -7,11 +7,9 @@
 
   inline-size: var(--gl-spinner-size);
   block-size: var(--gl-spinner-size);
-  display: inline-grid;
-  place-items: center;
+  display: inline-block;
   flex: 0 0 auto;
   color: var(--gl-spinner-ink);
-  overflow: hidden;
 }
 
 .gl-spinner--on-dark {
@@ -36,46 +34,46 @@
   fill: none;
   stroke: var(--gl-spinner-accent);
   stroke-linecap: round;
-  stroke-width: 4.5;
+  stroke-width: 4;
   transform-origin: 50px 50px;
   will-change: transform, stroke-dashoffset;
 }
 
 .gl-spinner .gl-orbit--one {
-  stroke-dasharray: 28 236;
+  stroke-dasharray: 30 234;
   animation: gl-orbit 1.5s linear infinite;
 }
 
 .gl-spinner .gl-orbit--two {
-  stroke-dasharray: 18 246;
-  stroke-opacity: 0.72;
+  stroke-dasharray: 19 245;
+  stroke-opacity: 0.7;
   animation: gl-orbit 1.5s linear -0.5s infinite;
 }
 
 .gl-spinner .gl-orbit--three {
   stroke-dasharray: 10 254;
-  stroke-opacity: 0.46;
+  stroke-opacity: 0.45;
   animation: gl-orbit 1.5s linear -1s infinite;
 }
 
+/*
+  The nested symbol SVG has an explicit 24×24 viewport centred at 38,38.
+  Therefore its geometry remains contained inside the 100×100 orbit,
+  without fragile translate/scale calculations.
+*/
 .gl-spinner .gl-symbol {
   fill: currentColor;
   transform-origin: 50px 50px;
-  will-change: transform, opacity;
   animation: gl-core 1.5s ease-in-out infinite;
 }
 
 @keyframes gl-orbit {
-  0% {
+  from {
     transform: rotate(-90deg);
     stroke-dashoffset: 0;
   }
 
-  50% {
-    stroke-dashoffset: -42;
-  }
-
-  100% {
+  to {
     transform: rotate(270deg);
     stroke-dashoffset: -84;
   }
@@ -84,13 +82,13 @@
 @keyframes gl-core {
   0%,
   100% {
-    opacity: 0.86;
-    transform: scale(0.88);
+    opacity: 0.9;
+    transform: scale(0.92);
   }
 
   50% {
     opacity: 1;
-    transform: scale(0.92);
+    transform: scale(0.96);
   }
 }
 
