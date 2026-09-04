@@ -1,28 +1,39 @@
-# GenLayer Portal - Custom Loading Spinner
+# GenLayer Spinner — Fragment Finality
 
-A high-performance, lightweight custom loading animation designed specifically for the GenLayer Portal. Built with pure SVG vectors and seamless CSS animations, this component provides a consistent visual identity across all loading states and interface themes.
+A unique loading spinner for the GenLayer Portal.
 
+## Concept
 
-## Key Features
+The official GenLayer mark is treated as **three geometric fragments**.
 
-* GenLayer Identity: Features the sharp, centered GenLayer vector geometry.
-* Seamless Infinite Loop: Engineered with pure linear frame transitions to eliminate keyframe reset stutters during continuous loading.
-* Dual Theme Adaptability: Native support and optimized contrast for both Dark Interface (#0b0f17) and Light Interface (#ffffff).
-* Scalability: Designed to remain legible and crisp at any dimension, from inline button loaders (24px) to full-page loading overlays (80px+).
-* Zero Dependencies: Pure HTML/CSS/SVG implementation with zero external libraries, ensuring optimal runtime performance.
+- Left wing, right wing and center triangle start separated and slightly rotated
+- They smoothly travel and lock into perfect form
+- Soft settle, then the cycle repeats
 
+This visualizes consensus reaching finality.
 
-## Design and Motion Logic
+## Live Experience
 
-The loading spinner utilizes a dual-ring differential motion system to represent validator consensus and state resolution across the GenLayer network.
+1. Page opens → full-screen dark loader with Fragment Finality spinner
+2. After \~2.7 seconds the loader fades out
+3. A clean GenLayer-style landing page appears
+4. “Replay Loading” button lets you watch the sequence again
 
-1. Loading Page Animation
-   - Outer Ring: Clockwise rotation at 3.0s duration
-   - Inner Ring: Counter-clockwise rotation at 2.0s duration
-   - Purpose: Visualizes initial network signal convergence and data processing.
+## Features
 
-2. Loading State Animation
-   - Outer Ring: Clockwise rotation at 1.8s duration
-   - Inner Ring: Clockwise rotation at 3.6s duration
-   - Motion Ratio: 1:2 speed differential
-   - Purpose: Visualizes active consensus building and transaction resolution.
+- Pure CSS animation
+- Official GenLayer mark geometry
+- No extra rings or decorative elements
+- Dark theme
+- Accessible (`role="status"`, `aria-label`)
+- Respects `prefers-reduced-motion`
+- Single file (no external dependencies)
+
+## How to use
+
+1. Open `index.html` or deploy to GitHub Pages / Vercel
+2. Submit the live URL to the GenLayer mission
+
+## Mission
+
+Created for the **Design the GenLayer Spinner** mission on the GenLayer Portal.
